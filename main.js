@@ -5,9 +5,8 @@ const config = require("./config.json");
 const client = new Discord.Client();
 const commands = new Map();
 const Music = require('discord.js-musicbot-addon');
-const music = new Music(client, {
-    youtubeKey: 'AIzaSyAbjjdQuidmBggy4RmCxhhmxXlrFRwHOig'
-});
+const musicconfig = require("./musicconfig.json");
+const music = new Music(client, musicconfig);
 
 client.on("ready", () => {
     walk("./commands");

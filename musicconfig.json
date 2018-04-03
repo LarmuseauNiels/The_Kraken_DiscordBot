@@ -1,0 +1,10 @@
+{
+    "youtubeKey": "AIzaSyAbjjdQuidmBggy4RmCxhhmxXlrFRwHOig",
+    "prefix" : "!",
+    "maxQueueSize" : "100",
+    "clearInvoker" : true,
+    "messageHelp" : true,
+    "botAdmins" : ["178435947816419328"],
+    "requesterName" : true,
+    "helpAlt" : ["music"]
+}
