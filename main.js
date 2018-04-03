@@ -5,7 +5,7 @@ const config = require("./config.json");
 const client = new Discord.Client();
 const commands = new Map();
 const Music = require('discord.js-musicbot-addon');
-const musicconfig = require("./musicconfig.json");
+const musicconfig = require("./data/musicconfig.json");
 const music = new Music(client, musicconfig);
 
 client.on("ready", () => {

@@ -1,0 +1,14 @@
+{
+    "title" : "Commands",
+    "description" : "Command list for The Kraken",
+    "commands" : [
+        {
+            "name" : "kraken",
+            "help" : "Tests if bot is online"
+        },
+        {
+            "name" : "musichelp",
+            "help" : "Gives help page for music commands"
+        }
+    ]
+}
