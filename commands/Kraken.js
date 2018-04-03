@@ -1,7 +1,7 @@
 module.exports = {
-    name: "ping",
-    desc: "pings the bot",
-    example: "ping",
+    name: "Kraken",
+    desc: "Awakens the Kraken",
+    example: "Kraken",
     run: (client, message, args, commands, config) => {
       message.reply("GGRRRARARR")
     }
