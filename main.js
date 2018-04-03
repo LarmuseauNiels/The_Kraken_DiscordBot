@@ -4,6 +4,10 @@ const fs = require("fs");
 const config = require("./config.json");
 const client = new Discord.Client();
 const commands = new Map();
+const Music = require('discord.js-musicbot-addon');
+const music = new Music(client, {
+    youtubeKey: 'AIzaSyAbjjdQuidmBggy4RmCxhhmxXlrFRwHOig'
+});
 
 client.on("ready", () => {
     walk("./commands");
