@@ -7,8 +7,19 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "discord.js": "^11.0.0"
+    "discord.js": "^11.0.0",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "opusscript": "0.0.6"
   },
   "author": "niels2398, wibidie",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LarmuseauNiels/Royal-Merchant-Guild-DiscordBot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LarmuseauNiels/Royal-Merchant-Guild-DiscordBot/issues"
+  },
+  "homepage": "https://github.com/LarmuseauNiels/Royal-Merchant-Guild-DiscordBot#readme"
 }
