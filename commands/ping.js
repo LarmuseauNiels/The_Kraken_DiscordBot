@@ -1,5 +1,3 @@
-const request = require("ping");
-
 module.exports = {
     name: "ping",
     desc: "pings the bot",
