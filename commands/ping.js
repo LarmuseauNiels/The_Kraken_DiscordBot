@@ -3,6 +3,6 @@ module.exports = {
     desc: "pings the bot",
     example: "ping",
     run: (client, message, args, commands, config) => {
-      message.reply("pong")
+      message.reply("GGRRRARARR")
     }
 };
