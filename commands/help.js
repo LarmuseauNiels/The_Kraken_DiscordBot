@@ -7,7 +7,6 @@ module.exports = {
         var Discord = require('discord.js');
         var helpmsg = new (require("discord.js")).RichEmbed();
         helpmsg.setAuthor(helptext.title, message.author.displayAvatarURL).setDescription(helptext.description);
-        //console.log(helptext);
         helptext.commands.forEach(command => {
             helpmsg.addField(command.name, command.help);
         });
