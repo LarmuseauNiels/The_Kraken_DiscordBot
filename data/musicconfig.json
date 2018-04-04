@@ -5,6 +5,9 @@
     "clearInvoker" : true,
     "messageHelp" : false,
     "botAdmins" : ["178435947816419328"],
+    "botOwner" : "178435947816419328",
     "requesterName" : true,
-    "helpAlt" : ["music"]
+    "helpAlt" : ["music"],
+    "disableOwnerCmd" : true,
+    "disableSet" : true
 }
