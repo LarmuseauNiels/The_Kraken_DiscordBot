@@ -4,11 +4,11 @@
     "commands" : [
         {
             "name" : "kraken",
-            "help" : "Tests if bot is online"
+            "help" : "Awakes the Kraken"
         },
         {
             "name" : "musichelp",
-            "help" : "Gives help page for music commands"
+            "help" : "Gives a list of commands playing for music"
         }
     ]
 }
