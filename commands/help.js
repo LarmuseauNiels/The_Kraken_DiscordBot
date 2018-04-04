@@ -11,6 +11,7 @@ module.exports = {
             helpmsg.addField(command.name, command.help);
         });
         message.channel.send(helpmsg);
+        message.delete();
     }
 };
 
