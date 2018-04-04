@@ -1,10 +1,10 @@
-const helptext = require("../data/helptext.json");
+const admins = require("../data/admins.json");
 module.exports = {
     name: "clean",
     desc: "cleans messages",
     example: "clean",
     run: (client, message, args, commands, config) => {
-        if(message.author.id ==="178435947816419328") {
+        if(isInArray(message.author.id, admins)) {
         try{
             let messagecount = parseInt(args);
             messagecount++;
@@ -20,3 +20,6 @@ module.exports = {
 };
 
 
+function isInArray(value, array) {
+    return array.indexOf(value) > -1;
+}
