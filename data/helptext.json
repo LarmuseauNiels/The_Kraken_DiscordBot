@@ -8,7 +8,11 @@
         },
         {
             "name" : "musichelp",
-            "help" : "Gives a list of commands playing for music"
+            "help" : "Gives a list of commands for playing music"
+        },
+        {
+            "name" : "clean",
+            "help" : "Removes the given amount of messages, usage: !clean 3"
         }
     ]
 }
