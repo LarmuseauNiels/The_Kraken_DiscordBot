@@ -1,9 +1,10 @@
 const admins = require("../data/admins.json");
 module.exports = {
     name: "eval",
-    desc: "evaluates javascript code",
-    example: "eval 2+2",
-    run: (client, message, args, commands, config) => {
+    desc: "Admin command, evaluates javascript code",
+    example: "!eval 2+2",
+    alias: [],
+    run: (client, message, args, commands, config, discord, logger) => {
         if(isInArray(message.author.id, admins)) {
             try {
                 const code = args.join(" ");

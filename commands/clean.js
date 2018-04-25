@@ -1,9 +1,10 @@
 const admins = require("../data/admins.json");
 module.exports = {
     name: "clean",
-    desc: "cleans messages",
-    example: "clean",
-    run: (client, message, args, commands, config) => {
+    desc: "Admin command, cleans a certain amount of messages",
+    example: "!clean 5",
+    alias: ["clear"],
+    run: (client, message, args, commands, config, discord, logger) => {
         if(isInArray(message.author.id, admins)) {
         try{
             let messagecount = parseInt(args);

@@ -2,9 +2,10 @@ const timezones = require("../data/timezones.json");
 
 module.exports = {
     name: "time",
-    desc: "time translation",
-    example: "something",
-    run: (client, message, args) => {
+    desc: "Displays time for someone's local timezone",
+    example: "!time 10pm cest",
+    alias: ["t","timezone"],
+    run: (client, message, args, commands, config, discord, logger) => {
         if (args.length > 0) { 
             args = args.map(a => a.toLowerCase());
             let timezone = Object.keys(timezones).filter(val => args.includes(val.toLowerCase()))[0];

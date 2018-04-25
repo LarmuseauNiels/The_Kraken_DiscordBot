@@ -1,8 +1,9 @@
 module.exports = {
     name: "kraken",
-    desc: "Awakens the Kraken",
-    example: "kraken",
-    run: (client, message, args, commands, config) => {
+    desc: "Awakes the Kraken",
+    example: "!kraken",
+    alias: ["ping","krak"],
+    run: (client, message, args, commands, config, discord, logger) => {
       message.reply("GGRRRARARR")
     }
 };

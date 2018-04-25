@@ -4,7 +4,7 @@
     "maxQueueSize" : "100",
     "clearInvoker" : true,
     "messageHelp" : false,
-    "botAdmins" : ["178435947816419328"],
+    "botAdmins" : ["178435947816419328","180376192103350273"],
     "botOwner" : "178435947816419328",
     "requesterName" : true,
     "helpAlt" : ["music"],

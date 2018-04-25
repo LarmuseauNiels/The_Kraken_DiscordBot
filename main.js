@@ -7,16 +7,18 @@ const commands = new Map();
 const Music = require('discord.js-musicbot-addon-niels');
 const musicconfig = require("./data/musicconfig.json");
 const music = new Music(client, musicconfig);
+var logger;
 
 client.on("ready", () => {
+    logger = client.channels.get("438423962159022091");
+    console.log("Loading commands");
     walk("./commands");
-    console.log("I'm ready");
 });
 
 client.on("message", message => {
     if (!message.content.startsWith(config.prefix) || message.author.bot) return;
     const [cmd, ...args] = message.content.slice(config.prefix.length).split(" ");
-    if (commands.has(cmd)) try {commands.get(cmd).run(client, message, args, commands, config)} catch(e) {console.error(e)}
+    if (commands.has(cmd)) try {commands.get(cmd).run(client, message, args, commands, config, Discord, logger)} catch(e) {console.error(e);logger.send('`ERR '+cmd.name+' crached:'+e+'`')}
 });
 
 client.login(config.token);
@@ -32,7 +34,8 @@ function walk(directory) {
                 if (stats && stats.isDirectory()) walk(directory + file);
                 else if (file.substr(-2) === "js") {
                     const cmd = require(directory + file);
-                    commands.set(cmd.name, cmd);
+                    if(commands.has(cmd.name)){logger.send("`ERR: dublicated command name: "+cmd.name+"`")}else{commands.set(cmd.name, cmd)};
+                    cmd.alias.forEach(item => {if(commands.has(item)){logger.send("`ERR: dublicate command name: "+item+"`")}else{commands.set(item, cmd)}});
                     console.log(`Loaded ${cmd.name} command`);
                 }
             })
