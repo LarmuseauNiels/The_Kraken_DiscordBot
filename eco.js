@@ -20,7 +20,7 @@ module.exports = function () {
                     statuschannel.sendMessage("ERR :disappointed:" + err);
                 };
             });
-        }, 5000);
+        }, 20000);
     }
 }
 
