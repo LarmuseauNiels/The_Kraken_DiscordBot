@@ -11,6 +11,7 @@
     "discord.js-musicbot-addon-niels": "0.0.2",
     "ffmpeg-binaries": "^3.2.2-3",
     "opusscript": "0.0.6",
+    "request": "^2.85.0",
     "ytdl-core": "^0.20.2"
   },
   "author": "niels2398, wibidie",
