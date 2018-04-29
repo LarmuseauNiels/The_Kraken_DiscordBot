@@ -39,6 +39,6 @@ module.exports = function () {
                     statuschannel.sendMessage("ERR :disappointed:" + err);
                 };
             });
-        }, 60000);
+        }, 30000);
     }
 }
