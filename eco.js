@@ -37,7 +37,7 @@ var sendmsg = function (client,discord,ecoconfig,contents,statuschannel) {
             embed.addField("serverip", ecoconfig.serverip + ':' + ecoconfig.serverport, false);
             embed.addField("Game version", contents.game.info.version, false);
             embed.addField("Players", contents.game.info.max_players, false);
-            embed.addField("Players online", ecoapi.is_online, false);
+            embed.addField("Players online", ecoapi.players, false);
             embed.addField("Map size", contents.game.info.map, false);
             embed.addField("Economy", contents.game.info.details.EconomyDesc, false);
             embed.addField("World Leader", contents.game.info.details.Leader, false);
