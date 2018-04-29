@@ -16,7 +16,7 @@ module.exports = function () {
                     statuschannel.fetchMessages({ limit: 1 }).then(messages => messages.array()[0].edit("ERR :disappointed: server offline"));
                 };
             });
-        }, 1000);
+        }, 10000);
     }
 }
 
