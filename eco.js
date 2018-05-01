@@ -6,10 +6,15 @@ module.exports = function () {
             let statuschannel = client.channels.get(ecoconfig.serverstatuschannel);
             request("http://" + ecoconfig.serverip + ':' + ecoconfig.serverport + '/info', (err, res, body) => {
                 if (err) console.log("ERR 10: " + err);
+                let contents = JSON.parse(body);
                 try {
-                    let temp = body;
-                    let contents = JSON.parse(temp);
-                    sendmsg(client, discord, ecoconfig, contents, statuschannel);
+                    let players = JSON.parse(body);
+                    request("http://" + ecoconfig.serverip + ':' + ecoconfig.serverport + '/api/v1/analysis/playstyles', (err, res, body) => {
+                        if (err) console.log("ERR 21: " + err);
+                        let players = JSON.parse(body);
+                        sendmsg(client, discord, ecoconfig, contents, statuschannel, players);
+                        sendplayers(client, discord, ecoconfig, contents, statuschannel, players);
+                    });
                 }
                 catch (err) {
                     console.log("ERR 19: " + err);
@@ -20,7 +25,7 @@ module.exports = function () {
     }
 }
 
-var sendmsg = function (client, discord, ecoconfig, contents, statuschannel) {
+var sendmsg = function (client, discord, ecoconfig, contents, statuschannel, players) {
     let embed = new discord.RichEmbed();
     embed.setAuthor("Server status").setDescription("The Legion eco server status");
     embed.addField("Server", contents.Description, false);
@@ -34,10 +39,24 @@ var sendmsg = function (client, discord, ecoconfig, contents, statuschannel) {
     embed.addField("Economy", contents.EconomyDesc, true);
     embed.addField("Leader", contents.Leader, true);
     embed.addField("World Objective", contents.WorldObjective, false);
-
+    embed.addBlankField();
     embed.setURL("http://149.202.201.40:6005/")
     embed.setTimestamp();
-    statuschannel.fetchMessages({ limit: 1 }).then(messages => messages.array()[0].edit(embed));
+    statuschannel.fetchMessages({ limit: 2 }).then(messages => messages.array()[1].edit(embed));
+}
+
+var sendplayers = function (client, discord, ecoconfig, contents, statuschannel, players) {
+    let embed = new discord.RichEmbed();
+    players.forEach(player => {
+        let contributions = "Name "+player.Username+"\n";
+        contributions += "Rating: " +  Math.floor(player.Rating*100000) + " thanks to " + player.Playstyle +  "\n";
+        player.ContributingStats.forEach(playerstat => {
+            contributions += playerstat.Summary +  "\n";
+        });
+        embed.addField("player", contributions + "\n " , false);
+    });
+    embed.setTimestamp();
+    statuschannel.fetchMessages({ limit: 2 }).then(messages => messages.array()[0].edit(embed));
 }
 
 
