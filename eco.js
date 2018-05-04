@@ -12,8 +12,13 @@ module.exports = function () {
                     request("http://" + ecoconfig.serverip + ':' + ecoconfig.serverport + '/api/v1/analysis/playstyles', (err, res, body) => {
                         if (err) console.log("ERR 21: " + err);
                         let players = JSON.parse(body);
-                        sendmsg(client, discord, ecoconfig, contents, statuschannel, players);
-                        sendplayers(client, discord, ecoconfig, contents, statuschannel, players);
+                        request("http://" + ecoconfig.serverip + ':' + ecoconfig.serverport + '/api/v1/laws', (err, res, bod) => {
+                            if (err) console.log("ERR 25: " + err);
+                            let politics = JSON.parse(bod);
+                            sendmsg(client, discord, ecoconfig, contents, statuschannel, players);
+                            sendplayers(client, discord, ecoconfig, contents, statuschannel, players);
+                            sendpolitics(client, discord, ecoconfig, contents, statuschannel, politics);
+                        });
                     });
                 }
                 catch (err) {
@@ -21,7 +26,7 @@ module.exports = function () {
                     statuschannel.fetchMessages({ limit: 1 }).then(messages => messages.array()[0].edit("ERR :disappointed: server offline"));
                 };
             });
-        }, 10000);
+        }, 30000);
     }
 }
 
@@ -63,8 +68,8 @@ var sendpolitics = function (client, discord, ecoconfig, contents, statuschannel
     let embed = new discord.RichEmbed();
     politics.forEach(law => {
         let contributions;
-        if(law.InEffect){contributions += "Law:  "}
-        else{contributions += "Proposal:  "}
+        if(law.State == "Passed")contributions += "Law:  ";
+        if(law.State == "Voting") contributions += "Proposal:  ";
         contributions += law.Title+"\n";
         contributions += "description: " + law.Description +  "\n";
         contributions += "pro: " + law.VotesYes + " votes by: " + + ;
@@ -77,8 +82,7 @@ var sendpolitics = function (client, discord, ecoconfig, contents, statuschannel
             contributions += player +  " ";
         });
         contributions +=  "\n";
-        if(law.State == "Voting")
-        contributions += "Time Left" + (Math.floor(law.VoteEndTime/3600/24)) + ' days '+ (Math.floor(law.VoteEndTime/3600) - (24*Math.floor(law.VoteEndTime/3600/24))) + " hours " + Math.floor((law.VoteEndTime%3600)/60) + " min";
+        if(law.State == "Voting") contributions += "Time Left" + (Math.floor(law.VoteEndTime/3600/24)) + ' days '+ (Math.floor(law.VoteEndTime/3600) - (24*Math.floor(law.VoteEndTime/3600/24))) + " hours " + Math.floor((law.VoteEndTime%3600)/60) + " min";
         embed.addField("Law", contributions + "\n " , false);
     });
     embed.setTimestamp();
