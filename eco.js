@@ -59,5 +59,31 @@ var sendplayers = function (client, discord, ecoconfig, contents, statuschannel,
     statuschannel.fetchMessages({ limit: 2 }).then(messages => messages.array()[0].edit(embed));
 }
 
+var sendpolitics = function (client, discord, ecoconfig, contents, statuschannel, politics) {
+    let embed = new discord.RichEmbed();
+    politics.forEach(law => {
+        let contributions;
+        if(law.InEffect){contributions += "Law:  "}
+        else{contributions += "Proposal:  "}
+        contributions += law.Title+"\n";
+        contributions += "description: " + law.Description +  "\n";
+        contributions += "pro: " + law.VotesYes + " votes by: " + + ;
+        law.VotedYes.forEach(player => {
+            contributions += player +  " ";
+        });
+        contributions += "\n";
+        contributions += "against: " + law.VotesNo + " votes by: " + + ;
+        law.VotedNo.forEach(player => {
+            contributions += player +  " ";
+        });
+        contributions +=  "\n";
+        if(law.State == "Voting")
+        contributions += "Time Left" + (Math.floor(law.VoteEndTime/3600/24)) + ' days '+ (Math.floor(law.VoteEndTime/3600) - (24*Math.floor(law.VoteEndTime/3600/24))) + " hours " + Math.floor((law.VoteEndTime%3600)/60) + " min";
+        embed.addField("Law", contributions + "\n " , false);
+    });
+    embed.setTimestamp();
+    statuschannel.fetchMessages({ limit: 2 }).then(messages => messages.array()[0].edit(embed));
+}
+
 
   
