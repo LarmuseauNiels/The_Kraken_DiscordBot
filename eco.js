@@ -9,16 +9,21 @@ module.exports = function () {
                 let contents = JSON.parse(body);
                 try {
                     let players = JSON.parse(body);
-                    request("http://" + ecoconfig.serverip + ':' + ecoconfig.serverport + '/api/v1/analysis/playstyles', (err, res, body) => {
+                    request("http://" + ecoconfig.serverip + ':' + ecoconfig.serverport + '/api/v1/analysis/playstyles', (err, res, bodyy) => {
                         if (err) console.log("ERR 21: " + err);
-                        let players = JSON.parse(body);
-                        request("http://" + ecoconfig.serverip + ':' + ecoconfig.serverport + '/api/v1/laws', (err, res, bod) => {
-                            if (err) console.log("ERR 25: " + err);
-                            let politics = JSON.parse(bod);
-                            sendmsg(client, discord, ecoconfig, contents, statuschannel, players);
-                            sendplayers(client, discord, ecoconfig, contents, statuschannel, players);
-                            sendpolitics(client, discord, ecoconfig, contents, statuschannel, politics);
-                        });
+                        let players = JSON.parse(bodyy);
+                        try {
+                            request("http://" + ecoconfig.serverip + ':' + ecoconfig.serverport + '/api/v1/laws', (err, res, bod) => {
+                                if (err) console.log("ERR 25: " + err);
+                                let politics = JSON.parse(bod);
+                                sendmsg(client, discord, ecoconfig, contents, statuschannel, players);
+                                sendplayers(client, discord, ecoconfig, contents, statuschannel, players);
+                                sendpolitics(client, discord, ecoconfig, contents, statuschannel, politics);
+                            });
+                        }
+                        catch (err) {
+                            console.log("ERR 18: " + err);
+                        };
                     });
                 }
                 catch (err) {
@@ -26,7 +31,7 @@ module.exports = function () {
                     statuschannel.fetchMessages({ limit: 1 }).then(messages => messages.array()[0].edit("ERR :disappointed: server offline"));
                 };
             });
-        }, 30000);
+        }, 45000);
     }
 }
 
@@ -47,7 +52,7 @@ var sendmsg = function (client, discord, ecoconfig, contents, statuschannel, pla
     embed.addBlankField();
     embed.setURL("http://149.202.201.40:6005/")
     embed.setTimestamp();
-    statuschannel.fetchMessages({ limit: 2 }).then(messages => messages.array()[1].edit(embed));
+    statuschannel.fetchMessages({ limit: 3 }).then(messages => messages.array()[2].edit(embed));
 }
 
 var sendplayers = function (client, discord, ecoconfig, contents, statuschannel, players) {
@@ -61,32 +66,38 @@ var sendplayers = function (client, discord, ecoconfig, contents, statuschannel,
         embed.addField("player", contributions + "\n " , false);
     });
     embed.setTimestamp();
-    statuschannel.fetchMessages({ limit: 2 }).then(messages => messages.array()[0].edit(embed));
+    statuschannel.fetchMessages({ limit: 3 }).then(messages => messages.array()[0].edit(embed));
 }
 
 var sendpolitics = function (client, discord, ecoconfig, contents, statuschannel, politics) {
     let embed = new discord.RichEmbed();
     politics.forEach(law => {
-        let contributions;
-        if(law.State == "Passed")contributions += "Law:  ";
-        if(law.State == "Voting") contributions += "Proposal:  ";
+        let contributions = "";
+        let title = "";
+        
         contributions += law.Title+"\n";
         contributions += "description: " + law.Description +  "\n";
-        contributions += "pro: " + law.VotesYes + " votes by: " + + ;
-        law.VotedYes.forEach(player => {
-            contributions += player +  " ";
-        });
-        contributions += "\n";
-        contributions += "against: " + law.VotesNo + " votes by: " + + ;
-        law.VotedNo.forEach(player => {
-            contributions += player +  " ";
-        });
-        contributions +=  "\n";
-        if(law.State == "Voting") contributions += "Time Left" + (Math.floor(law.VoteEndTime/3600/24)) + ' days '+ (Math.floor(law.VoteEndTime/3600) - (24*Math.floor(law.VoteEndTime/3600/24))) + " hours " + Math.floor((law.VoteEndTime%3600)/60) + " min";
-        embed.addField("Law", contributions + "\n " , false);
+
+        if(law.State == "Voting"){
+            contributions += "pro: " + law.VotesYes + " \nvotes by: ";
+            law.VotedYes.forEach(player => {
+                contributions += player +  " ";
+            });
+            contributions += "\n";
+            contributions += "against: " + law.VotesNo + " \nvotes by: ";
+            law.VotedNo.forEach(player => {
+                contributions += player +  " ";
+            });
+            contributions +=  "\n";
+            contributions += "Time Left:  " + (Math.floor(law.VoteEndTime/3600/24)) + ' days '+ (Math.floor(law.VoteEndTime/3600) - (24*Math.floor(law.VoteEndTime/3600/24))) + " hours " + Math.floor((law.VoteEndTime%3600)/60) + " min";
+        }
+        if(law.State == "Passed") title = "Law";
+        if(law.State == "Voting") title = "Proposal";
+        embed.addField(title, contributions + " " , false);
     });
     embed.setTimestamp();
-    statuschannel.fetchMessages({ limit: 2 }).then(messages => messages.array()[0].edit(embed));
+    //statuschannel.send(embed);
+    statuschannel.fetchMessages({ limit: 3 }).then(messages => messages.array()[1].edit(embed));
 }
 
 
