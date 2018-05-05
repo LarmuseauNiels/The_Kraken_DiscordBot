@@ -89,7 +89,7 @@ var sendpolitics = function (client, discord, ecoconfig, contents, statuschannel
                 contributions += player +  " ";
             });
             contributions +=  "\n";
-            contributions += "Time Left:  " + (Math.floor(law.VoteEndTime/3600/24)) + ' days '+ (Math.floor(law.VoteEndTime/3600) - (24*Math.floor(law.VoteEndTime/3600/24))) + " hours " + Math.floor((law.VoteEndTime%3600)/60) + " min";
+            contributions += "Time Left:  " + (Math.floor(law.VoteEndTime/3600)) + " hours " + Math.floor((law.VoteEndTime%3600)/60) + " min";
         }
         if(law.State == "Passed") title = "Law";
         if(law.State == "Voting") title = "Proposal";
