@@ -96,7 +96,7 @@ var sendpolitics = function (client, discord, ecoconfig, contents, statuschannel
         embed.addField(title, contributions + " " , false);
     });
     embed.setTimestamp();
-    //statuschannel.send(embed);
+    
     statuschannel.fetchMessages({ limit: 3 }).then(messages => messages.array()[1].edit(embed));
 }
 

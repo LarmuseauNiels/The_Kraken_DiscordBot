@@ -12,6 +12,7 @@
     "ffmpeg-binaries": "^3.2.2-3",
     "opusscript": "0.0.6",
     "request": "^2.85.0",
+    "wolfram": "^0.3.4",
     "ytdl-core": "^0.20.2"
   },
   "author": "niels2398, wibidie",
