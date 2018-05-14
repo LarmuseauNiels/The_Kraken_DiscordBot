@@ -13,8 +13,8 @@ client.on("ready", () => {
     logger = client.channels.get("438423962159022091");
     console.log("Loading commands");
     walk("./commands");
-    require("./eco.js")();
-    starteco(client, Discord);
+    //require("./eco.js")();
+    //starteco(client, Discord);
 });
 
 client.on("message", message => {
