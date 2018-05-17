@@ -1,4 +1,4 @@
-
+const version = "1.0.1";
 const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
@@ -11,6 +11,7 @@ var logger;
 
 client.on("ready", () => {
     logger = client.channels.get("438423962159022091");
+    logger.send("`INFO: bot started version "+version+"`");
     console.log("Loading commands");
     walk("./commands");
     //require("./eco.js")();
