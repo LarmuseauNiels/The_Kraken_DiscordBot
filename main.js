@@ -1,4 +1,4 @@
-const version = "1.0.2";
+const version = "1.0.3";
 const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");

@@ -7,6 +7,7 @@ module.exports = {
     alias: ["t","timezone"],
     run: (client, message, args, commands, config, discord, logger) => {
         if (args.length > 0) { 
+            try{
             args = args.map(a => a.toLowerCase());
             let timezone = Object.keys(timezones).filter(val => args.includes(val.toLowerCase()))[0];
             let offset = timezones[timezone];
@@ -28,8 +29,12 @@ module.exports = {
             time = new Date(midnight.getTime() - (offset) * 1000 * 60 * 60);
             //message.channel.sendEmbed(new (require("discord.js")).RichEmbed().setTimestamp().setDescription("I think it is currently this time for you"));
             return message.channel.sendEmbed(new (require("discord.js")).RichEmbed().setTimestamp(time).setDescription(`Today, ${args+meridian} ${timezone} converts to:`));
+            }
+            catch(e){
+                message.reply("Thats now how you use !time, try something like: !time 10pm cest");
+            }
         } else {
-            // assuming 2017, its not a leap year
+            // assuming 2018, its not a leap year
             const month_lengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
             const date = new Date();
             message.channel.send("What month are you looking for? (1-12)");
@@ -41,7 +46,7 @@ module.exports = {
                 const month = parseInt(msgs.first().content);
                 if (isNaN(month) || month > 12 || month < 1) return message.channel.send(month + " is an invalid month.");
                 const month2 = month - 1;
-                let total = 0; // because jan 1 was on sunday in 2017 start at 0
+                let total = 1; // because jan 1 was on sunday in 2017 start at 0 (2018 monday start at 1)
                 for (let i = 0; i < month2; i++) {
                     total += month_lengths[i];
                 }
