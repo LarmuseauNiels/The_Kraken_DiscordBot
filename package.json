@@ -8,12 +8,12 @@
   },
   "dependencies": {
     "discord.js": "^11.0.0",
-    "discord.js-musicbot-addon-niels": "0.0.2",
+    "discord.js-musicbot-addon-niels": "6.0.2",
     "ffmpeg-binaries": "^3.2.2-3",
     "opusscript": "0.0.6",
-    "request": "^2.85.0",
+    "request": "^2.87.0",
     "wolfram": "^0.3.4",
-    "ytdl-core": "^0.20.2"
+    "ytdl-core": "^0.20.4"
   },
   "author": "niels2398, wibidie",
   "license": "ISC",
