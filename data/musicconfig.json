@@ -9,6 +9,8 @@
     "requesterName" : true,
     "helpAlt" : ["music"],
     "disableOwnerCmd" : true,
+    "musicPresence": true,
+    "clearPresence": true,
     "disableSet" : true,
     "defVolume" : 15
 }

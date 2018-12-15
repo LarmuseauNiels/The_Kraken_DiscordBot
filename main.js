@@ -4,14 +4,15 @@ const fs = require("fs");
 const config = require("./config.json");
 const client = new Discord.Client();
 const commands = new Map();
-const Music = require('discord.js-musicbot-addon-niels');
+client.music  = require('discord.js-musicbot-addon');
 const musicconfig = require("./data/musicconfig.json");
-const music = new Music(client, musicconfig);
+
 var logger;
 
 client.on("ready", () => {
     logger = client.channels.get("438423962159022091");
     logger.send("`INFO: bot started version "+version+"`");
+    client.music.start(client,musicconfig);
     console.log("Loading commands");
     walk("./commands");
     //require("./eco.js")();
