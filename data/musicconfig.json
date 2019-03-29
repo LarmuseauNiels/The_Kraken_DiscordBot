@@ -1,16 +1,9 @@
 {
     "youtubeKey": "AIzaSyAbjjdQuidmBggy4RmCxhhmxXlrFRwHOig",
     "prefix" : "!",
-    "maxQueueSize" : "100",
-    "clearInvoker" : true,
-    "messageHelp" : false,
-    "botAdmins" : ["178435947816419328","180376192103350273"],
-    "botOwner" : "178435947816419328",
-    "requesterName" : true,
-    "helpAlt" : ["music"],
-    "disableOwnerCmd" : true,
+    "bigPicture": true,
+    "botAdmins" : ["178435947816419328"],
     "musicPresence": true,
     "clearPresence": true,
-    "disableSet" : true,
     "defVolume" : 15
 }

@@ -78,7 +78,7 @@ module.exports = {
                     });
                 });
             }).catch(e => {
-                message.channel.send("Sorry bitch too slow");
+                message.channel.send("Sorry too slow");
             });
         }
     }    

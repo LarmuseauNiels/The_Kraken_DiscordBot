@@ -1,35 +1,42 @@
-const version = "1.0.3";
+const version = "1.0.5";
 const Discord = require("discord.js");
 const fs = require("fs");
-const config = require("./config.json");
 const client = new Discord.Client();
 const commands = new Map();
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const adapter = new FileSync('db.json');
+const db = low(adapter);
+const prefix = "!";
+//var logger;
+
 client.music  = require('discord.js-musicbot-addon');
 const musicconfig = require("./data/musicconfig.json");
-
-var logger;
+client.music.start(client,musicconfig);
 
 client.on("ready", () => {
-    logger = client.channels.get("438423962159022091");
-    logger.send("`INFO: bot started version "+version+"`");
-    client.music.start(client,musicconfig);
+    //logger = client.channels.get("438423962159022091");
+    //logger.send("`INFO: bot started version "+version+"`");
     console.log("Loading commands");
     walk("./commands");
-    //require("./eco.js")();
-    //starteco(client, Discord);
+    loadmodules();
 });
 
 client.on("message", message => {
     try{
-    if (!message.content.startsWith(config.prefix) || message.author.bot) return;
-    const [cmd, ...args] = message.content.slice(config.prefix.length).split(" ");
-    if (commands.has(cmd)) try {commands.get(cmd).run(client, message, args, commands, config, Discord, logger)} catch(e) {console.error(e);logger.send('`ERR '+cmd.name+' crached:'+e+'`')}
-    }catch(e){logger.send("`ERR: somehow a certain message wasn't able to be interpreted: "+message+"`");}
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    const [cmd, ...args] = message.content.slice(prefix.length).split(" ");
+    if (commands.has(cmd)) 
+    try {commands.get(cmd).run(client, message, args, commands, Discord)} 
+        catch(e) {console.error(e);//logger.send('`ERR '+cmd.name+' crached:'+e+'`')
+    }
+    }catch(e){//logger.send("`ERR: somehow a certain message wasn't able to be interpreted: "+message+"`");}
+        console.log("`ERR: somehow a certain message wasn't able to be interpreted: "+message+"`");}
 });
 
-client.login(config.token);
+client.login(process.env.TOKEN);
 
-/* */ /* */ /* */
+/* */ /* Commands */ /* */
 
 function walk(directory) {
     directory += "/";
@@ -40,8 +47,14 @@ function walk(directory) {
                 if (stats && stats.isDirectory()) walk(directory + file);
                 else if (file.substr(-2) === "js") {
                     const cmd = require(directory + file);
-                    if(commands.has(cmd.name)){logger.send("`ERR: dublicated command name: "+cmd.name+"`")}else{commands.set(cmd.name, cmd)};
-                    cmd.alias.forEach(item => {if(commands.has(item)){logger.send("`ERR: dublicate command name: "+item+"`")}else{commands.set(item, cmd)}});
+                    if(commands.has(cmd.name)){//logger.send("`ERR: dublicated command name: "+cmd.name+"`")
+                }
+                    else{commands.set(cmd.name, cmd)};
+                    cmd.alias.forEach(item => {
+                        if(commands.has(item)){//logger.send("`ERR: dublicate command name: "+item+"`")
+                    }
+                        else{commands.set(item, cmd)}
+                    });
                     console.log(`Loaded ${cmd.name} command`);
                 }
             })
@@ -49,3 +62,12 @@ function walk(directory) {
     });
 }
 
+/* */ /* */ /* */ 
+
+function loadmodules(){
+    console.log("Loading Modules");
+    //require("./modules/eco.js")(client, Discord);
+    //require("./modules/mcserver.js")(client, Discord);
+    require("./modules/chansubs.js")(client, db);
+    
+}

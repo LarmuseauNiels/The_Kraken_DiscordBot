@@ -1,1 +1,1 @@
-# Royal-Merchant-Guild-DiscordBot
+# The Kraken DiscordBot
