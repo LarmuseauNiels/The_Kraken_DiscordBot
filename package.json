@@ -15,7 +15,8 @@
     "request": "^2.88.0",
     "uws": "^99.0.0",
     "ytdl-core": "^0.20.4",
-    "ytpl": "^0.1.14"
+    "ytpl": "^0.1.14",
+    "ytsearcher": "^1.2.2"
   },
   "author": "niels2398",
   "license": "ISC",
