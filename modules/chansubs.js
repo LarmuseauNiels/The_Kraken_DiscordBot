@@ -1,6 +1,6 @@
 const subconfig = require("../data/subconfig.json");
 
-module.exports = function (client, db) {
+module.exports = function (client) {
     console.log("loading subscription module");
     client.on('messageReactionAdd', (reaction, user) => {
         if(reaction.message.channel.id  == subconfig.channelid){

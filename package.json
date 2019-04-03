@@ -9,15 +9,13 @@
   },
   "dependencies": {
     "discord.js": "^11.4.2",
-    "discord.js-musicbot-addon": "^13.4.2",
     "ffmpeg-binaries": "^3.2.2",
-    "lowdb": "^1.0.0",
-    "minecraft-pinger": "^1.0.3",
     "node-gyp": "^3.8.0",
     "opusscript": "0.0.6",
     "request": "^2.88.0",
     "uws": "^99.0.0",
-    "ytdl-core": "^0.20.4"
+    "ytdl-core": "^0.20.4",
+    "ytpl": "^0.1.14"
   },
   "author": "niels2398",
   "license": "ISC",

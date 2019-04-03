@@ -1,22 +1,10 @@
-const version = "1.0.5";
 const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client();
 const commands = new Map();
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('db.json');
-const db = low(adapter);
 const prefix = "!";
-//var logger;
-
-client.music  = require('discord.js-musicbot-addon');
-const musicconfig = require("./data/musicconfig.json");
-client.music.start(client,musicconfig);
 
 client.on("ready", () => {
-    //logger = client.channels.get("438423962159022091");
-    //logger.send("`INFO: bot started version "+version+"`");
     console.log("Loading commands");
     walk("./commands");
     loadmodules();
@@ -28,9 +16,9 @@ client.on("message", message => {
     const [cmd, ...args] = message.content.slice(prefix.length).split(" ");
     if (commands.has(cmd)) 
     try {commands.get(cmd).run(client, message, args, commands, Discord)} 
-        catch(e) {console.error(e);//logger.send('`ERR '+cmd.name+' crached:'+e+'`')
+        catch(e) {console.error(e);
     }
-    }catch(e){//logger.send("`ERR: somehow a certain message wasn't able to be interpreted: "+message+"`");}
+    }catch(e){
         console.log("`ERR: somehow a certain message wasn't able to be interpreted: "+message+"`");}
 });
 
@@ -66,8 +54,13 @@ function walk(directory) {
 
 function loadmodules(){
     console.log("Loading Modules");
+
+    client.music  = require("./modules/music-module.js");
+    let musicconfig = require("./data/musicconfig.json");
+    client.music.start(client,musicconfig);
+    
     //require("./modules/eco.js")(client, Discord);
     //require("./modules/mcserver.js")(client, Discord);
-    require("./modules/chansubs.js")(client, db);
+    require("./modules/chansubs.js")(client);
     
 }
