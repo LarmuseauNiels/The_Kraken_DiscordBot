@@ -5,7 +5,7 @@ module.exports = function (client, discord) {
     //serverchannel.send("t");
     setInterval(function () {
             pinger.ping('94.23.255.19', '23987', (error,result) => {
-                if(error) { console.log(error)}
+                if(error) { console.log(error);}
                 else{
                     let embed = new discord.RichEmbed();
                     embed.setAuthor("Server status").setDescription("FTB infinity evolved");

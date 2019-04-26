@@ -10,6 +10,7 @@
   "dependencies": {
     "discord.js": "^11.4.2",
     "ffmpeg-binaries": "^3.2.2",
+    "ical": "^0.6.0",
     "node-gyp": "^3.8.0",
     "opusscript": "0.0.6",
     "request": "^2.88.0",

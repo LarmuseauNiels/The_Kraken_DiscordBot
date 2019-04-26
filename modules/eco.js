@@ -1,3 +1,4 @@
+
 const request = require("request");
 const ecoconfig = require("../data/ecoconfig.json");
 module.exports = function (client, discord) {
@@ -55,11 +56,11 @@ var sendmsg = function (client, discord, ecoconfig, contents, statuschannel) {
     embed.addField("Animals", contents.Animals, true);
     embed.addField("Plants", contents.Plants, true);
     embed.addField("World Objective", contents.WorldObjective, false);
-    embed.setURL("http://147.135.222.55:6005/")
+    embed.setURL("http://147.135.222.55:6005/");
     embed.setTimestamp();
     statuschannel.fetchMessages({ limit: 3 }).then(messages => messages.array()[0].edit(embed));
 }
-
+/*
 var sendplayers = function (client, discord, ecoconfig, contents, statuschannel, players) {
     let embed = new discord.RichEmbed();
     players.forEach(player => {
@@ -105,3 +106,4 @@ var sendpolitics = function (client, discord, ecoconfig, contents, statuschannel
     
     statuschannel.fetchMessages({ limit: 3 }).then(messages => messages.array()[1].edit(embed));
 }
+*/
