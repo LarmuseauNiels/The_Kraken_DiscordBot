@@ -1,7 +1,7 @@
 const ical = require('ical');
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
  
-ical.fromURL('http://lanyrd.com/topics/nodejs/nodejs.ics', {}, function (err, data) {
+ical.fromURL('https://cloud.flamingpalm.com/remote.php/dav/calendars/discord-178435947816419328/flamingpalm_shared_by_niels?export', {}, function (err, data) {
     for (let k in data) {
         if (data.hasOwnProperty(k)) {
             var ev = data[k];
