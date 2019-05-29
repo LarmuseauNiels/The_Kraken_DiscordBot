@@ -1,4 +1,17 @@
 {
     "schemaVersion": 2,
-    "templateId": "node/10.13.0"
+    "dockerfileLines": [
+                        "FROM library/node:10.13.0-alpine",
+                        "RUN apk update && apk upgrade &&  apk add --no-cache git",
+                        "RUN apk add  --no-cache ffmpeg",
+                        "RUN mkdir -p /usr/src/app",
+                        "WORKDIR /usr/src/app",
+                        "COPY ./package.json /usr/src/app/",
+                        "RUN npm install && npm cache clean --force",
+                        "COPY ./ /usr/src/app",
+                        "ENV NODE_ENV production",
+                        "ENV PORT 80",
+                        "EXPOSE 80",
+                        "CMD [ \"npm\", \"start\" ]"
+                    ]
 }
