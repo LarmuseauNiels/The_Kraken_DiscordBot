@@ -34,7 +34,8 @@ module.exports = {
                 message.reply("Thats now how you use !time, try something like: !time 10pm cest");
             }
         } else {
-            // assuming 2018, its not a leap year
+            // assuming 2019, its not a leap year 
+            // TODO: don't hardcode the year -.-
             const month_lengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
             const date = new Date();
             message.channel.send("What month are you looking for? (1-12)");
@@ -46,7 +47,7 @@ module.exports = {
                 const month = parseInt(msgs.first().content);
                 if (isNaN(month) || month > 12 || month < 1) return message.channel.send(month + " is an invalid month.");
                 const month2 = month - 1;
-                let total = 1; // because jan 1 was on sunday in 2017 start at 0 (2018 monday start at 1)
+                let total = 2; // because jan 1 was on sunday in 2017 start at 0 (2018 monday start at 1) set to 2 for 2019
                 for (let i = 0; i < month2; i++) {
                     total += month_lengths[i];
                 }
