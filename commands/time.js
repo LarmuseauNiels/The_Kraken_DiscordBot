@@ -34,11 +34,9 @@ module.exports = {
                 message.reply("Thats now how you use !time, try something like: !time 10pm cest");
             }
         } else {
-            var month_lengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-            if ((parseInt(getYear())%4 == 0 && parseInt(getYear())%100 != 0) || (parseInt(getYear())%4 == 0 &&  parseInt(getYear())%100 == 0 && parseInt(getYear())%400 == 0)
-            {
-                month_lengths[1] = 29;
-            }
+            // assuming 2019, its not a leap year 
+            // TODO: don't hardcode the year -.-
+            const month_lengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
             const date = new Date();
             message.channel.send("What month are you looking for? (1-12)");
             message.channel.awaitMessages(m => m.author.id === message.author.id, {
@@ -62,7 +60,7 @@ module.exports = {
                 message.channel.send("```prolog\nPick a day and time (24h format).\n" + x + "\nExample: 23 3:34```").then(msg => {
                     msg.channel.awaitMessages(m => m.author.id === message.author.id, {
                        max: 1,
-                       time: 15000,
+                       time: 10000,
                        error: ["time"]
                     }).then(msgs => {
                         const [inDay, inTime] = msgs.first().content.split(" ");
