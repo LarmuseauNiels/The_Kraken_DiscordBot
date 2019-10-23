@@ -3,7 +3,7 @@ module.exports = {
     desc: "shows this helptext",
     example: "!help",
     alias: ["h"],
-    run: (client, message, args, commands, config, discord, logger) => {
+    run: (client, message, args, commands, discord) => {
         var helpmsg = new discord.RichEmbed();
         helpmsg.setAuthor("Commands", message.author.displayAvatarURL).setDescription("Command list");
         let cmds = [];

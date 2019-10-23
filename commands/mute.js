@@ -5,7 +5,7 @@ module.exports = {
     desc: "Mutes a user",
     example: "!tempmute @user 1s/m/h/d",
     alias: ["tmute","mute"],
-    run: (client, message, args, commands, config, discord, logger) => {
+    run: (client, message, args, commands, discord ) => {
         message.reply("Command not implemented.");
     }
 }

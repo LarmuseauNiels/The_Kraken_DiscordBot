@@ -4,7 +4,7 @@ module.exports = {
     desc: "Admin command, cleans a certain amount of messages",
     example: "!clean 5",
     alias: ["clear"],
-    run: (client, message, args, commands, config, discord, logger) => {
+    run: (client, message, args, commands, discord) => {
         if(isInArray(message.author.id, admins)) {
         try{
             let messagecount = parseInt(args);

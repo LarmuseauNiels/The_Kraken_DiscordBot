@@ -3,7 +3,7 @@ module.exports = {
     desc: "Ping the Kraken",
     example: "!kraken",
     alias: ["ping","krak"],
-    run: (client, message, args, commands, config, discord, logger) => {
+    run: (client, message, args, commands,  discord) => {
       message.reply("Pong!")
     }
 };
