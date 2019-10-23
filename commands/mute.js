@@ -17,7 +17,7 @@ module.exports = {
         const modlog = message.guild.channels.find(channel => channel.name === 'kraken_administration');
         let muterole = message.guild.roles.find(`name`, "Muted");
         //start of create role
-        let muteChannel = message.guild.channels.find(`name`, "Kraken_Administration");
+        let muteChannel = message.guild.channels.find(`name`, "kraken_administration");
         if (!muteChannel) return message.channel.send('**Please create a channel with the name `mute-banned-kicked-logs`**')
         if (!muterole) {
             try{
