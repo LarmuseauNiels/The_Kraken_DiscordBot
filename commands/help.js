@@ -8,7 +8,7 @@ module.exports = {
         helpmsg.setAuthor("Commands", message.author.displayAvatarURL).setDescription("Command list");
         let cmds = [];
         commands.forEach(cmd => {if(!isInArray(cmd, cmds))cmds.push(cmd)});
-        console.log(cmds);
+        //console.log(cmds);
         cmds.forEach(command => {
             helpmsg.addField(command.name, command.desc + ' \nUsage: '+ command.example);
         });
