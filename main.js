@@ -1,8 +1,14 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-const client = new Discord.Client();
-const commands = new Discord.Collection();
-const prefix = "!";
+
+class Client extends Discord.Client {
+    constructor() {
+      super();
+      this.commands = new Discord.Collection();
+      this.prefix = "!";
+    }
+}
+const client = new Client();
 
 client.on("ready", () => {
     console.log("Loading commands");
@@ -12,10 +18,10 @@ client.on("ready", () => {
 
 client.on("message", message => {
     try{
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-    const [cmd, ...args] = message.content.slice(prefix.length).split(" ");
-    if (commands.has(cmd)) 
-    try {commands.get(cmd).run(client, message, args, commands, Discord)} 
+    if (!message.content.startsWith(client.prefix) || message.author.bot) return;
+    const [cmd, ...args] = message.content.slice(client.prefix.length).split(" ");
+    if (client.commands.has(cmd)) 
+    try {client.commands.get(cmd).run(client, message, args, client.commands, Discord)} 
         catch(e) {console.error(e);
     }
     }catch(e){
@@ -35,13 +41,13 @@ function walk(directory) {
                 if (stats && stats.isDirectory()) walk(directory + file);
                 else if (file.substr(-2) === "js") {
                     const cmd = require(directory + file);
-                    if(commands.has(cmd.name)){//logger.send("`ERR: dublicated command name: "+cmd.name+"`")
+                    if(client.commands.has(cmd.name)){//logger.send("`ERR: dublicated command name: "+cmd.name+"`")
                 }
-                    else{commands.set(cmd.name, cmd)};
+                    else{client.commands.set(cmd.name, cmd)};
                     cmd.alias.forEach(item => {
-                        if(commands.has(item)){//logger.send("`ERR: dublicate command name: "+item+"`")
+                        if(client.commands.has(item)){//logger.send("`ERR: dublicate command name: "+item+"`")
                     }
-                        else{commands.set(item, cmd)}
+                        else{client.commands.set(item, cmd)}
                     });
                     console.log(`Loaded ${cmd.name} command`);
                 }
