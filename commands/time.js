@@ -5,7 +5,7 @@ module.exports = {
     desc: "Displays time for someone's local timezone",
     example: "!time 10pm cest",
     alias: ["t","timezone"],
-    run: (client, message, args, commands,  discord) => {
+    run: (client, message, args) => {
         if (args.length > 0) { 
             try{
             args = args.map(a => a.toLowerCase());

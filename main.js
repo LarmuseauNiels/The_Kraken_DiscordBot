@@ -6,6 +6,7 @@ class Client extends Discord.Client {
       super();
       this.commands = new Discord.Collection();
       this.prefix = "!";
+      this.discord = Discord;
     }
 }
 const client = new Client();
@@ -21,7 +22,7 @@ client.on("message", message => {
     if (!message.content.startsWith(client.prefix) || message.author.bot) return;
     const [cmd, ...args] = message.content.slice(client.prefix.length).split(" ");
     if (client.commands.has(cmd)) 
-    try {client.commands.get(cmd).run(client, message, args, client.commands, Discord)} 
+    try {client.commands.get(cmd).run(client, message, args)} 
         catch(e) {console.error(e);
     }
     }catch(e){

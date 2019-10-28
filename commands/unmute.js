@@ -5,7 +5,7 @@ module.exports = {
     desc: "Unmutes a muted user",
     example: "!unmute @user",
     alias: ["umute","undomute"],
-    run: (client, message, args, commands,  discord) => {
+    run: (client, message, args) => {
         message.reply("Command not implemented.");
     }
 }

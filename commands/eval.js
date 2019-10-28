@@ -4,7 +4,7 @@ module.exports = {
     desc: "Admin command, evaluates javascript code",
     example: "!eval 2+2",
     alias: [],
-    run: (client, message, args, commands,  discord) => {
+    run: (client, message, args) => {
         if(isInArray(message.author.id, admins)) {
             try {
                 const code = args.join(" ");

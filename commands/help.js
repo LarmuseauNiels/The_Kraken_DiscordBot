@@ -3,11 +3,11 @@ module.exports = {
     desc: "shows this helptext",
     example: "!help",
     alias: ["h"],
-    run: (client, message, args, commands, discord) => {
-        var helpmsg = new discord.RichEmbed();
+    run: (client, message, args) => {
+        var helpmsg = new client.discord.RichEmbed();
         helpmsg.setAuthor("Commands", message.author.displayAvatarURL).setDescription("Command list");
         let cmds = [];
-        commands.forEach(cmd => {if(!isInArray(cmd, cmds))cmds.push(cmd)});
+        client.commands.forEach(cmd => {if(!isInArray(cmd, cmds))cmds.push(cmd)});
         //console.log(cmds);
         cmds.forEach(command => {
             helpmsg.addField(command.name, command.desc + ' \nUsage: '+ command.example);
