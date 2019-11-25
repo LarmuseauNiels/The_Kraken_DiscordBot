@@ -6,7 +6,7 @@ module.exports = {
     example: "!play something",
     alias: ["add","song"],
     run: (client, message, args) => {
-        async () => {
+        (async () => {
             const queue = message.client.queue;
             const serverQueue = client.queue.get(message.guild.id);
 
@@ -50,7 +50,7 @@ module.exports = {
                 serverQueue.songs.push(song);
                 return message.channel.send(`${song.title} has been added to the queue!`);
             }
-        }
+        })();
     },
     play(message, song) {
 		const queue = message.client.queue;
