@@ -27,7 +27,7 @@ class Client extends Discord.Client {
 			.on('end', () => {
 				console.log('Music ended!');
 				serverQueue.songs.shift();
-				this.play(message, serverQueue.songs[0]);
+				this.playsong(message, serverQueue.songs[0]);
 			})
 			.on('error', error => {
 				console.error(error);
