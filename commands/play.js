@@ -6,7 +6,6 @@ module.exports = {
     example: "!play something",
     alias: ["add","song"],
     run: (client, message, args) => {
-        const args = message.content.split(' ');
 		const queue = message.client.queue;
 		const serverQueue = client.queue.get(message.guild.id);
 
