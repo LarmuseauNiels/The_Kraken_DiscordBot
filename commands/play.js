@@ -17,7 +17,7 @@ module.exports = {
                 return message.channel.send('I need the permissions to join and speak in your voice channel!');
             }
 
-            const songInfo = await ytdl.getInfo(args[1]);
+            const songInfo = await ytdl.getInfo(args[0]);
             const song = {
                 title: songInfo.title,
                 url: songInfo.video_url,
