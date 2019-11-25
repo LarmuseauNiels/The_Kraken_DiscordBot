@@ -8,8 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "discord.js": "^11.4.2",
-    "discord.js-musicbot-addon": "^13.5.2",
+    "discord.js": "^11.5.1",
+    "discord.js-musicbot-addon": "^13.8.1",
     "ffmpeg-binaries": "^3.2.2",
     "ical": "^0.6.0",
     "ms": "^2.1.2",
@@ -17,8 +17,8 @@
     "opusscript": "0.0.6",
     "request": "^2.88.0",
     "uws": "^99.0.0",
-    "ytdl-core": "^0.20.4",
-    "ytpl": "^0.1.14",
+    "ytdl-core": "^1.0.1",
+    "ytpl": "^0.1.18",
     "ytsearcher": "^1.2.2"
   },
   "author": "niels2398",
