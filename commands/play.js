@@ -40,7 +40,7 @@ module.exports = {
                 try {
                     var connection = await voiceChannel.join();
                     queueContruct.connection = connection;
-                    this.play(message, queueContruct.songs[0]);
+                    client.playsong(message, queueContruct.songs[0]);
                 } catch (err) {
                     console.log(err);
                     queue.delete(message.guild.id);
@@ -51,27 +51,5 @@ module.exports = {
                 return message.channel.send(`${song.title} has been added to the queue!`);
             }
         })();
-    },
-    play(message, song) {
-		const queue = message.client.queue;
-		const guild = message.guild;
-		const serverQueue = queue.get(message.guild.id);
-	
-		if (!song) {
-			serverQueue.voiceChannel.leave();
-			queue.delete(guild.id);
-			return;
-		}
-	
-		const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
-			.on('end', () => {
-				console.log('Music ended!');
-				serverQueue.songs.shift();
-				this.play(message, serverQueue.songs[0]);
-			})
-			.on('error', error => {
-				console.error(error);
-			});
-		dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-	}
+    }
 };
