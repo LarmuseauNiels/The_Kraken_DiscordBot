@@ -63,9 +63,11 @@ function loadmodules(){
     console.log("Loading Modules");
 
     //client.music  = require("./modules/music-module.js");
-    client.music = require("discord.js-musicbot-addon");
-    let musicconfig = require("./data/musicconfig.json");
-    client.music.start(client,musicconfig);
+
+    // MUSIC BOT IS BROKEN
+    // client.music = require("discord.js-musicbot-addon");
+    // let musicconfig = require("./data/musicconfig.json");
+    // client.music.start(client,musicconfig);
     
     //require("./modules/eco.js")(client, Discord);
     //require("./modules/mcserver.js")(client, Discord);
