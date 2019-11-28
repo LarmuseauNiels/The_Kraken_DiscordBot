@@ -10,7 +10,7 @@ module.exports = {
         message.reply("Command not implemented.");
 
           //!tempmute @user 1s/m/h/d
-
+/*
         let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
         if(!tomute) return message.reply("Couldn't find user.");
         const mod = message.author;
@@ -55,6 +55,7 @@ module.exports = {
                     tomute.removeRole(muterole.id);
                     //message.channel.send(`<@${tomute.id}> has been unmuted!`);
                 }, ms(mutetime));
+                */
         }
     }
 }
