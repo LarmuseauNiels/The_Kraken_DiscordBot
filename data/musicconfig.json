@@ -1,6 +1,6 @@
 {
     "youtubeKey": "AIzaSyAbjjdQuidmBggy4RmCxhhmxXlrFRwHOig",
-    "prefix" : "!",
+    "prefix" : "\\",
     "bigPicture": true,
     "botAdmins" : ["178435947816419328"],
     "musicPresence": true,

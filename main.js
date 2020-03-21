@@ -5,7 +5,7 @@ class Client extends Discord.Client {
     constructor() {
       super();
       this.commands = new Discord.Collection();
-      this.prefix = "!";
+      this.prefix = "\\";
       this.discord = Discord;
       this.queue = new Map();
 
