@@ -31,6 +31,7 @@ module.exports = {
                         return Promise.resolve(searchResults.items[0].link);
                     });
                     url = await urlPromise;
+                    console.log(url);
                 }
                 else{
                     url = args[0];
