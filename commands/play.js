@@ -38,7 +38,7 @@ module.exports = {
                     title: songInfo.title,
                     url: songInfo.video_url,
                 };
-                console.log("adding " = songInfo.title);
+                console.log("adding " + songInfo.title);
                 
                 if (!serverQueue) {
                     const queueContruct = {
