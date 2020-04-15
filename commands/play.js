@@ -36,16 +36,12 @@ module.exports = {
                     console.log(args.join(' '));
                     ytsr(args.join(' '), function(err, searchResults) {
                         if(err) console.error(err);
-                        console.log(JSON.stringify(searchResults));
-                        message.channel.send(searchResults.items[0].link);
+                        songInfo = await ytdl.getInfo(searchResults.items[0].link);
+                        song = {
+                            title: songInfo.title,
+                            url: songInfo.video_url,
+                        };
                     });
-                    
-                    //message.channel.send(searchResponce);
-                    // songInfo = await ytdl.getInfo(searchResponce.items.first().link);
-                    // song = {
-                    //     title: songInfo.title,
-                    //     url: songInfo.video_url,
-                    // };
                 }
                 
                 if (!serverQueue) {
