@@ -33,12 +33,14 @@ module.exports = {
                     };
                 }
                 else{
-                    let searchResponce = ytsr(message.content)
-                    songInfo = await ytdl.getInfo(searchResponce.items.first().link);
-                    song = {
-                        title: songInfo.title,
-                        url: songInfo.video_url,
-                    };
+                    console.log(message.content);
+                    let searchResponce = ytsr(message.content);
+                    console.log(searchResponce);
+                    //songInfo = await ytdl.getInfo(searchResponce.items.first().link);
+                    // song = {
+                    //     title: songInfo.title,
+                    //     url: songInfo.video_url,
+                    // };
                 }
                 
                 if (!serverQueue) {
