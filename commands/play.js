@@ -28,7 +28,7 @@ module.exports = {
                     console.log(args.join(' '));
                     let urlPromise = ytsr(args.join(' '));
                     let searchResults = await urlPromise;
-                    url = searchResults.items[0].link
+                    url = searchResults.items.find(item => item.type == "video").link;
                     console.log(url);
                 }
                 else{
