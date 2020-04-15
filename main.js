@@ -18,9 +18,13 @@ class Client extends Discord.Client {
         
 		if (!song) {
 			serverQueue.voiceChannel.leave();
-			queue.delete(guild.id);
+            queue.delete(guild.id);
+            this.user.setActivity("");
 			return;
-		}
+        }
+        else{
+            this.user.setActivity(song.title)
+        }
 	
 		const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
 			.on('end', () => {
