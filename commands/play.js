@@ -29,7 +29,6 @@ module.exports = {
                     let urlPromise = ytsr(args.join(' '));
                     let searchResults = await urlPromise;
                     url = searchResults.items.find(item => item.type == "video").link;
-                    console.log(url);
                 }
                 else{
                     url = args[0];
@@ -39,6 +38,7 @@ module.exports = {
                     title: songInfo.title,
                     url: songInfo.video_url,
                 };
+                console.log("adding " = songInfo.title);
                 
                 if (!serverQueue) {
                     const queueContruct = {
