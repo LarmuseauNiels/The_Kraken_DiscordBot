@@ -35,12 +35,11 @@ module.exports = {
                 else{
                     console.log(args.join(' '));
                     let searchResponce = await ytsr(args.join(' '));
-                    console.log(searchResponce);
-                    //songInfo = await ytdl.getInfo(searchResponce.items.first().link);
-                    // song = {
-                    //     title: songInfo.title,
-                    //     url: songInfo.video_url,
-                    // };
+                    songInfo = await ytdl.getInfo(searchResponce.items.first().link);
+                    song = {
+                        title: songInfo.title,
+                        url: songInfo.video_url,
+                    };
                 }
                 
                 if (!serverQueue) {
