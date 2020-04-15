@@ -26,11 +26,9 @@ module.exports = {
                 var url;
                 if(!ytdl.validateURL(args[0])){
                     console.log(args.join(' '));
-                    let urlPromise = ytsr(args.join(' '), function(err, searchResults) {
-                        if(err) console.error(err);
-                        return Promise.resolve(searchResults.items[0].link);
-                    });
-                    url = await urlPromise;
+                    let urlPromise = ytsr(args.join(' '));
+                    let searchResults = await urlPromise;
+                    url = searchResults.items[0].link
                     console.log(url);
                 }
                 else{
