@@ -33,8 +33,8 @@ module.exports = {
                     };
                 }
                 else{
-                    console.log(message.content);
-                    let searchResponce = ytsr(message.content);
+                    console.log(args.join(' '));
+                    let searchResponce = await ytsr(args.join(' '));
                     console.log(searchResponce);
                     //songInfo = await ytdl.getInfo(searchResponce.items.first().link);
                     // song = {
