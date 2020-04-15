@@ -36,8 +36,8 @@ module.exports = {
                     console.log(args.join(' '));
                     ytsr(args.join(' '), function(err, searchResults) {
                         if(err) console.error(err);
-                        console.log(searchResults.toString());
-                        message.channel.send(JSON.stringify(searchResults));
+                        console.log(JSON.stringify(searchResults));
+                        message.channel.send(searchResults.items[0].link);
                     });
                     
                     //message.channel.send(searchResponce);
