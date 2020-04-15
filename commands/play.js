@@ -23,26 +23,23 @@ module.exports = {
 
             }
             else{
-                var songInfo;
-                var song;
-                if(ytdl.validateURL(args[0])){
-                    songInfo = await ytdl.getInfo(args[0]);
-                    song = {
-                        title: songInfo.title,
-                        url: songInfo.video_url,
-                    };
+                var url;
+                if(!ytdl.validateURL(args[0])){
+                    console.log(args.join(' '));
+                    let urlPromise = ytsr(args.join(' '), function(err, searchResults) {
+                        if(err) console.error(err);
+                        return Promise.resolve(searchResults.items[0].link);
+                    });
+                    url = await urlPromise;
                 }
                 else{
-                    console.log(args.join(' '));
-                    ytsr(args.join(' '), function(err, searchResults) {
-                        if(err) console.error(err);
-                        songInfo = await ytdl.getInfo(searchResults.items[0].link);
-                        song = {
-                            title: songInfo.title,
-                            url: songInfo.video_url,
-                        };
-                    });
+                    url = args[0];
                 }
+                const songInfo = await ytdl.getInfo(url);
+                const song = {
+                    title: songInfo.title,
+                    url: songInfo.video_url,
+                };
                 
                 if (!serverQueue) {
                     const queueContruct = {
