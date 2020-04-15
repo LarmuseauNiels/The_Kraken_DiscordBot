@@ -35,7 +35,7 @@ module.exports = {
                 else{
                     console.log(args.join(' '));
                     let searchResponce = await ytsr(args.join(' '));
-                    console.log(searchResponce.items.first().link);
+                    //console.log(searchResponce.items.first().link);
                     message.channel.send(searchResponce);
                     // songInfo = await ytdl.getInfo(searchResponce.items.first().link);
                     // song = {
