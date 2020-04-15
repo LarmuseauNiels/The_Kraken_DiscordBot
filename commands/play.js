@@ -23,8 +23,8 @@ module.exports = {
 
             }
             else{
-                const songInfo = "";
-                const song = "";
+                var songInfo;
+                var song;
                 if(ytdl.validateURL(args[0])){
                     songInfo = await ytdl.getInfo(args[0]);
                     song = {
