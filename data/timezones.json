@@ -25,7 +25,7 @@
     "GMT": 0,
     "UTC": 0,
     "CET": 1,
-    "CEST": 1,
+    "CEST": 2,
     "EET": 2,
     "EEST": 2,
     "GTZ": 4,
