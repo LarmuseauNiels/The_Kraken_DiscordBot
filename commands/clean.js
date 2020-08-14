@@ -3,13 +3,13 @@ module.exports = {
     name: "clean",
     desc: "Admin command, cleans a certain amount of messages",
     example: "!clean 5",
-    alias: ["clear"],
+    alias: ["clear", "remove"],
     run: (client, message, args) => {
         if(isInArray(message.author.id, admins)) {
         try{
             let messagecount = parseInt(args);
             messagecount++;
-            message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+            message.channel.messages.fetch({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
             message.delete();
         }
         catch (er)  {message.reply("ERR: Please specify a number");}
