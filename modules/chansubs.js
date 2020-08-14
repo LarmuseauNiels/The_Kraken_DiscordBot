@@ -8,7 +8,7 @@ module.exports = function (client) {
                 reaction.message.guild.roles.fetch()
                 .then(
                     roles => {
-                        reaction.message.guild.member(user).addRole(roles.find(val => val.name == reaction.message.content));
+                        reaction.message.guild.member(user).addRole(roles.array.find(val => val.name == reaction.message.content));
                     })
                 .catch(err => console.log(err))
             }
@@ -21,7 +21,7 @@ module.exports = function (client) {
                 reaction.message.guild.roles.fetch()
                 .then(
                     roles => {
-                        reaction.message.guild.member(user).removeRole(roles.find( val => val.name == reaction.message.content));
+                        reaction.message.guild.member(user).removeRole(roles.array.find( val => val.name == reaction.message.content));
                     })
                 .catch(err => console.log(err))
             }
