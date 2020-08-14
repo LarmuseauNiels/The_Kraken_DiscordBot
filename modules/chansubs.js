@@ -9,7 +9,7 @@ module.exports = function (client) {
                 .then(
                     roles => {
                         console.log(roles.cache.values);
-                        reaction.message.guild.member(user).roles.add(roles.cache.values.find(val => val.name == reaction.message.content));
+                        reaction.message.guild.member(user).roles.add(Array.from(roles.cache.values()).find(val => val.name == reaction.message.content));
                     })
                 .catch(err => console.log(err))
             }
