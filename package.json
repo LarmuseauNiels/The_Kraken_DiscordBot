@@ -11,6 +11,7 @@
     "discord.js": "^12.2.0",
     "ical": "^0.6.0",
     "ms": "^2.1.2",
+    "node-cron": "^2.0.3",
     "node-gyp": "^3.8.0",
     "opusscript": "0.0.6",
     "request": "^2.88.2",

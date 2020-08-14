@@ -92,5 +92,6 @@ function walk(directory) {
 function loadmodules(){
     console.log("Loading Modules");
     require("./modules/chansubs.js")(client);
+    require("./modules/statistics.js")(client);
 }
 
