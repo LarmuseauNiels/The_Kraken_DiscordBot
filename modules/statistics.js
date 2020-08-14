@@ -14,7 +14,7 @@ module.exports = function (client) {
     connection.query(
         'Select ID from Members', function (error, results, fields) {
             if(error != null){ console.log(error)}
-            knownUserCache = results
+            results.forEach(result => knownUserCache.push(result.ID))
             console.log(knownUserCache)
         });
 
