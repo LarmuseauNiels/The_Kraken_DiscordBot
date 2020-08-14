@@ -15,7 +15,7 @@ module.exports = function (client) {
     cron.schedule('35 0,15,30,45 * * * *', () => {
         console.log('running a cron job');
         client.channels.fetch('530537522921734178', false)
-        .then(channel => channel.members.array.forEach(member => {
+        .then(channel => Array.from(channel.members.values()).forEach(member => {
             // if(!knownUserCache.includes(member.id)){
             //     //add user to DB
             //     knownUserCache.push(member.id)
