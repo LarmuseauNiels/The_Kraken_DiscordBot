@@ -14,19 +14,19 @@ module.exports = function (client) {
 
     cron.schedule('35 0,15,30,45 * * * *', () => {
         console.log('running a cron job');
-        // client.channels.fetch('530537522921734178', false)
-        // .then(channel => channel.members.array.forEach(snowflake, member => {
-        //     // if(!knownUserCache.includes(member.id)){
-        //     //     //add user to DB
-        //     //     knownUserCache.push(member.id)
-        //     // }
-        //     connection.query(
-        //     'INSERT INTO VoiceConnected (ID) VALUES (?)',
-        //     [member.id], function (error, results, fields) {
-        //         if(error != null){ console.log(error)}
-        //     });
-        // }) )
-        // .catch( err => console.log(err));
+        client.channels.fetch('530537522921734178', false)
+        .then(channel => channel.members.array.forEach(snowflake, member => {
+            // if(!knownUserCache.includes(member.id)){
+            //     //add user to DB
+            //     knownUserCache.push(member.id)
+            // }
+            connection.query(
+            'INSERT INTO VoiceConnected (ID) VALUES (?)',
+            [member.id], function (error, results, fields) {
+                if(error != null){ console.log(error)}
+            });
+        }) )
+        .catch( err => console.log(err));
     });
 }
 

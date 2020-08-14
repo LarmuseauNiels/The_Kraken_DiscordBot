@@ -14,6 +14,6 @@ module.exports = function (client) {
             catch(e){console.log(e);}
         }
     });
-    client.channels.get(subconfig.channelid).fetchMessages({limit: 100});
+    client.channels.fetch(subconfig.channelid).fetchMessages({limit: 100});
 }
 
