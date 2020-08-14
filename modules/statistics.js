@@ -25,8 +25,8 @@ module.exports = function (client) {
                 knownUserCache.push(member.id)
             }
             connection.query(
-            'INSERT INTO VoiceConnected (ID) VALUES (?)',
-            [member.user.id], function (error, results, fields) {
+            'INSERT INTO VoiceConnected (ID, ChannelID) VALUES (?, ?)',
+            [member.user.id, '530537522921734178'], function (error, results, fields) {
                 if(error != null){ console.log(error)}
             });
         }) )
