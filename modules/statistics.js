@@ -1,4 +1,4 @@
-const mysql      = require('mysql');
+const mysql = require('mysql');
 const cron = require('node-cron');
 //const config = require("../data/statsconfig.json");
 var knownUserCache = []
