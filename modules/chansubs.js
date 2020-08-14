@@ -8,8 +8,8 @@ module.exports = function (client) {
                 reaction.message.guild.roles.fetch()
                 .then(
                     roles => {
-                        console.log(roles);
-                        reaction.message.guild.member(user).addRole(roles.array.find(val => val.name == reaction.message.content));
+                        console.log(roles.cache.values);
+                        reaction.message.guild.member(user).roles.add(roles.cache.values.find(val => val.name == reaction.message.content));
                     })
                 .catch(err => console.log(err))
             }
