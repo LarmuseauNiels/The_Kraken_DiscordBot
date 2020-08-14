@@ -4,13 +4,27 @@ module.exports = function (client) {
     console.log("loading subscription module");
     client.on('messageReactionAdd', (reaction, user) => {
         if(reaction.message.channel.id  == subconfig.channelid){
-            try{reaction.message.guild.member(user).addRole(reaction.message.guild.roles.find(val => val.name == reaction.message.content));}
+            try{ 
+                reaction.message.guild.roles.fetch()
+                .then(
+                    roles => {
+                        reaction.message.guild.member(user).addRole(roles.find(val.name == reaction.message.content));
+                    })
+                .catch(err => console.log(err))
+            }
             catch(e){console.log(e);}
         }
     });
     client.on('messageReactionRemove', (reaction, user) => {
         if(reaction.message.channel.id  == subconfig.channelid){
-            try{reaction.message.guild.member(user).removeRole(reaction.message.guild.roles.find(val => val.name == reaction.message.content));}
+            try{ 
+                reaction.message.guild.roles.fetch()
+                .then(
+                    roles => {
+                        reaction.message.guild.member(user).removeRole(roles.find(val.name == reaction.message.content));
+                    })
+                .catch(err => console.log(err))
+            }
             catch(e){console.log(e);}
         }
     });
@@ -18,6 +32,5 @@ module.exports = function (client) {
     .then(channel => channel.messages.fetch({limit: 100})) 
     .catch( err => console.log(err)
     );
-     
 }
 
