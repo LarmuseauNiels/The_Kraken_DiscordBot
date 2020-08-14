@@ -16,13 +16,17 @@ module.exports = function (client) {
         console.log('running a cron job');
         client.channels.fetch('530537522921734178', false)
         .then(channel => Array.from(channel.members.values()).forEach(member => {
-            // if(!knownUserCache.includes(member.id)){
-            //     //add user to DB
-            //     knownUserCache.push(member.id)
-            // }
+            if(!knownUserCache.includes(member.id)){
+                connection.query(
+                    'INSERT INTO Members (ID,DisplayName,avatar) VALUES (?,?,?)',
+                    [member.user.id, member.user.username, member.user.avatar], function (error, results, fields) {
+                        if(error != null){ console.log(error)}
+                    });
+                knownUserCache.push(member.id)
+            }
             connection.query(
             'INSERT INTO VoiceConnected (ID) VALUES (?)',
-            [member.id], function (error, results, fields) {
+            [member.user.id], function (error, results, fields) {
                 if(error != null){ console.log(error)}
             });
         }) )
