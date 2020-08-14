@@ -11,9 +11,16 @@ var connection = mysql.createConnection({
 
 module.exports = function (client) {
     console.log("loading statistics module");
+    connection.query(
+        'Select ID from Members', function (error, results, fields) {
+            if(error != null){ console.log(error)}
+            knownUserCache = fields
+            console.log(knownUserCache)
+        });
 
     cron.schedule('35 0,15,30,45 * * * *', () => {
         console.log('running a cron job');
+        
         client.channels.fetch('530537522921734178', false)
         .then(channel => Array.from(channel.members.values()).forEach(member => {
             if(!knownUserCache.includes(member.id)){
