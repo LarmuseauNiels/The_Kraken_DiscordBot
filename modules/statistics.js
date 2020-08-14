@@ -14,7 +14,7 @@ module.exports = function (client) {
     connection.query(
         'Select ID from Members', function (error, results, fields) {
             if(error != null){ console.log(error)}
-            knownUserCache = fields
+            knownUserCache = results
             console.log(knownUserCache)
         });
 
