@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const ytdl = require('ytdl-core');
+const mysql = require('mysql');
 class Client extends Discord.Client {
     constructor() {
       super();
@@ -8,7 +9,12 @@ class Client extends Discord.Client {
       this.prefix = "\\";
       this.discord = Discord;
       this.queue = new Map();
-
+      this.DBconnection = mysql.createConnection({
+        host     : process.env.DBHOST,
+        user     : 'root',
+        password : process.env.DBPASS,
+        database : 'discordstats'
+      });
     }
 
     playsong(message, song) {
@@ -93,6 +99,6 @@ function loadmodules(){
     console.log("Loading Modules");
     require("./modules/chansubs.js")(client);
     require("./modules/statistics.js")(client);
-    require("./modules/webapi.js")();
+    require("./modules/webapi.js")(client);
 }
 

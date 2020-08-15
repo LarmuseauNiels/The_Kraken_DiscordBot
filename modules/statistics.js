@@ -1,23 +1,18 @@
-const mysql = require('mysql');
+
 const cron = require('node-cron');
 const config = require("../data/statsconfig.json");
 var knownUserCache = []
 var trackedChannels = []
-var connection = mysql.createConnection({
-  host     : process.env.DBHOST,
-  user     : 'root',
-  password : process.env.DBPASS,
-  database : 'discordstats'
-});
+
 
 module.exports = function (client) {
     console.log("loading statistics module");
-    connection.query(
+    client.DBconnection.query(
         'Select ID from Members', function (error, results, fields) {
             if(error != null){ console.log(error)}
             results.forEach(result => knownUserCache.push(result.ID))
         });
-    connection.query(
+        client.DBconnection.query(
         'Select ID from Channel', function (error, results, fields) {
             if(error != null){ console.log(error)}
             results.forEach(result => trackedChannels.push(result.ID))
@@ -29,14 +24,14 @@ module.exports = function (client) {
             client.channels.fetch(channelID, false)
             .then(channel => Array.from(channel.members.values()).forEach(member => {
                 if(!knownUserCache.includes(member.id)){
-                    connection.query(
+                    client.DBconnection.query(
                         'INSERT INTO Members (ID,DisplayName,avatar) VALUES (?,?,?)',
                         [member.user.id, member.user.username, member.user.avatar], function (error, results, fields) {
                             if(error != null){ console.log(error)}
                         });
                     knownUserCache.push(member.id)
                 }
-                connection.query(
+                client.DBconnection.query(
                 'INSERT INTO VoiceConnected (ID, ChannelID) VALUES (?, ?)',
                 [member.user.id, channelID], function (error, results, fields) {
                     if(error != null){ console.log(error)}

@@ -1,18 +1,13 @@
-const mysql = require('mysql');
+
 //const config = require("../data/webapi.json");
 const express = require('express');
 var cors = require('cors');
 const app = express();
 
-var connection = mysql.createConnection({
-  host     : process.env.DBHOST,
-  user     : 'root',
-  password : process.env.DBPASS,
-  database : 'discordstats'
-});
 
 
-module.exports = function () {
+
+module.exports = function (client) {
     app.use(cors());
 
     console.log("Loading WabApi Module")
@@ -22,7 +17,7 @@ module.exports = function () {
     
     app.get('/activity', function (req, res) {
         var responce;
-        connection.query(
+        client.DBconnection.query(
             'select timestamp,count(*) as online from VoiceConnected group by timestamp',
              function (error, results, fields) {
                 if(error != null){ 
