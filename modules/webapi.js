@@ -22,13 +22,16 @@ module.exports = function () {
         connection.query(
             'select timestamp,count(*) from VoiceConnected group by timestamp',
              function (error, results, fields) {
-                if(error != null){ responce = error}
+                if(error != null){ 
+                    console.log(error)
+                    res.send(JSON.stringify("Failure"))
+                }
                 else{
-                    responce =  results
+                    res.send(JSON.stringify(results))
                 }
                 //results.forEach(result => knownUserCache.push(result.ID))
             });
-        res.send(JSON.stringify(responce))
+       
 
         //
     })
