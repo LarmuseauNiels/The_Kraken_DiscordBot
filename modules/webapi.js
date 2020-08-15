@@ -20,7 +20,7 @@ module.exports = function () {
     app.get('/activity', function (req, res) {
         var responce;
         connection.query(
-            'select timestamp,count(*) from VoiceConnected group by timestamp',
+            'select timestamp,count(*) as online from VoiceConnected group by timestamp',
              function (error, results, fields) {
                 if(error != null){ 
                     console.log(error)
