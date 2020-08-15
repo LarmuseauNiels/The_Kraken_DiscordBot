@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "discord.js": "^12.2.0",
+    "express": "^4.17.1",
     "ical": "^0.6.0",
     "ms": "^2.1.2",
     "mysql": "^2.18.1",
