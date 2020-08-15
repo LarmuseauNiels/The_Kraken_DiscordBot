@@ -12,12 +12,28 @@ var connection = mysql.createConnection({
 
 
 module.exports = function () {
+    console.log("Loading WabApi Module")
     app.get('/', function (req, res) {
         res.send('API test page.')
     })
-    app.get('/ping', function (req, res) {
-        res.send('pong')
+    
+    app.get('/activity', function (req, res) {
+        var responce;
+        connection.query(
+            'select timestamp,count(*) from VoiceConnected group by timestamp',
+             function (error, results, fields) {
+                if(error != null){ responce = error}
+                else{
+                    responce =  results
+                }
+                //results.forEach(result => knownUserCache.push(result.ID))
+            });
+        res.send(JSON.stringify(responce))
+
+        //
     })
+    
+
 
     app.listen(3000)
 }
