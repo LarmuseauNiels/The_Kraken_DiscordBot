@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const config = require("../data/webapi.json");
+//const config = require("../data/webapi.json");
 const express = require('express')
 const app = express()
 
