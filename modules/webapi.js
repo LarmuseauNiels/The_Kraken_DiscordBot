@@ -1,7 +1,8 @@
 const mysql = require('mysql');
 //const config = require("../data/webapi.json");
-const express = require('express')
-const app = express()
+const express = require('express');
+var cors = require('cors');
+const app = express();
 
 var connection = mysql.createConnection({
   host     : process.env.DBHOST,
@@ -12,6 +13,8 @@ var connection = mysql.createConnection({
 
 
 module.exports = function () {
+    app.use(cors());
+
     console.log("Loading WabApi Module")
     app.get('/', function (req, res) {
         res.send('API test page.')
