@@ -15,6 +15,9 @@ module.exports = function () {
     app.get('/', function (req, res) {
         res.send('API test page.')
     })
+    app.get('/ping', function (req, res) {
+        res.send('pong')
+    })
 
-    app.listen(80)
+    app.listen(3000)
 }
