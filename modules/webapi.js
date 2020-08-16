@@ -30,7 +30,7 @@ module.exports = function (client) {
     app.get('/channelActivity', function (req, res) {
         var responce;
         client.DBconnection.query(
-           "select Channel.ChannelName, count(*) from VoiceConnected left join Channel on VoiceConnected.ChannelID = Channel.ID "+
+           "select Channel.ChannelName as name, count(*) as y from VoiceConnected left join Channel on VoiceConnected.ChannelID = Channel.ID "+
            " WHERE VoiceConnected.TimeStamp >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY group by Channel.ChannelName",
             function (error, results, fields) {
                 if(error != null){ 
@@ -45,7 +45,7 @@ module.exports = function (client) {
     app.get('/userActivity', function (req, res) {
         var responce;
         client.DBconnection.query(
-           "SELECT Members.DisplayName,VoiceConnected.ID , count(*) FROM VoiceConnected LEFT JOIN Members ON VoiceConnected.ID = Members.ID "+
+           "SELECT Members.DisplayName as name,VoiceConnected.ID as y, count(*) FROM VoiceConnected LEFT JOIN Members ON VoiceConnected.ID = Members.ID "+
            " WHERE VoiceConnected.TimeStamp >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY GROUP BY VoiceConnected.ID" ,
             function (error, results, fields) {
                 if(error != null){ 
