@@ -9,11 +9,12 @@ class Client extends Discord.Client {
       this.prefix = "\\";
       this.discord = Discord;
       this.queue = new Map();
-      this.DBconnection = mysql.createConnection({
-        host     : process.env.DBHOST,
-        user     : 'root',
-        password : process.env.DBPASS,
-        database : 'discordstats'
+      this.DBconnection = mysql.createPool({
+        connectionLimit : 10,
+        host            : process.env.DBHOST,
+        user            : 'root',
+        password        : process.env.DBPASS,
+        database        : 'discordstats'
       });
     }
 
