@@ -45,7 +45,7 @@ module.exports = function (client) {
     app.get('/userActivity', function (req, res) {
         var responce;
         client.DBconnection.query(
-           "SELECT Members.DisplayName as name,VoiceConnected.ID as y, count(*) FROM VoiceConnected LEFT JOIN Members ON VoiceConnected.ID = Members.ID "+
+           "SELECT Members.DisplayName as name, count(*) as y FROM VoiceConnected LEFT JOIN Members ON VoiceConnected.ID = Members.ID "+
            " WHERE VoiceConnected.TimeStamp >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY GROUP BY VoiceConnected.ID" ,
             function (error, results, fields) {
                 if(error != null){ 
