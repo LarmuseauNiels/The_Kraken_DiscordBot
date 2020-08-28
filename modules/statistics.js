@@ -10,7 +10,11 @@ module.exports = function (client) {
     console.log("loading statistics module");
     -
     client.on('channelCreate', (channel) => { // needs to be tested
+        console.log("event ran");
+        console.log(channel);
         if(typeof(channel) == typeof(client.discord.VoiceChannel)){
+            console.log("is voice channel");
+            console.log(channel.guild.id);
             if(channel.guild.id == "530537522355240961"){
                 console.log("new flaming palm voice channel made");
                 client.DBconnection.query(
