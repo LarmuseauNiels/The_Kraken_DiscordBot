@@ -12,6 +12,7 @@ module.exports = function (client) {
     client.on('channelCreate', (channel) => { // needs to be tested
         console.log("event ran");
         console.log(channel);
+        console.log(typeof(channel) + "  ==  " + typeof(client.discord.VoiceChannel));
         if(typeof(channel) == typeof(client.discord.VoiceChannel)){
             console.log("is voice channel");
             console.log(channel.guild.id);
