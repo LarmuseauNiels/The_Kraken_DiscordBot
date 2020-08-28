@@ -8,7 +8,7 @@ var trackedChannels = []
 
 module.exports = function (client) {
     console.log("loading statistics module");
-    var getTrackedChannels = new function(){
+    var getTrackedChannels = function(){
         console.log("loading trackedChannels from database");
         client.DBconnection.query(
             'Select ID from Channel', function (error, results, fields) {
