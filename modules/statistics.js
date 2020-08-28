@@ -38,7 +38,6 @@ module.exports = function (client) {
             if(error != null){ console.log(error)}
             results.forEach(result => knownUserCache.push(result.ID))
         });
-    getTrackedChannels();
     cron.schedule('30 0,15,30,45 * * * *', () => {
         console.log('running statistics tracking cron job');
         trackedChannels.forEach(channelID =>{
