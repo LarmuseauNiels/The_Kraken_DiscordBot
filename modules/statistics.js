@@ -4,18 +4,19 @@ const config = require("../data/statsconfig.json");
 var knownUserCache = []
 var trackedChannels = []
 
-var getTrackedChannels = new function(){
-    console.log("loading trackedChannels from database");
-    client.DBconnection.query(
-        'Select ID from Channel', function (error, results, fields) {
-            if(error != null){ console.log(error)}
-            results.forEach(result => trackedChannels.push(result.ID))
-        });
-    console.log(trackedChannels);
-}
+
 
 module.exports = function (client) {
     console.log("loading statistics module");
+    var getTrackedChannels = new function(){
+        console.log("loading trackedChannels from database");
+        client.DBconnection.query(
+            'Select ID from Channel', function (error, results, fields) {
+                if(error != null){ console.log(error)}
+                results.forEach(result => trackedChannels.push(result.ID))
+            });
+        console.log(trackedChannels);
+    }
     client.on('channelCreate', (channel) => { // needs to be tested
         if(typeof(channel) == typeof(client.discord.VoiceChannel)){
             if(channel.guild.id == "530537522355240961"){
