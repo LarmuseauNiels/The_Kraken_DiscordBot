@@ -11,6 +11,7 @@ var getTrackedChannels = new function(){
             if(error != null){ console.log(error)}
             results.forEach(result => trackedChannels.push(result.ID))
         });
+    console.log(trackedChannels);
 }
 
 module.exports = function (client) {
