@@ -28,11 +28,11 @@ module.exports = {
             midnight.setUTCSeconds(0);
             time = new Date(midnight.getTime() - (offset) * 1000 * 60 * 60);
             //message.channel.sendEmbed(new (require("discord.js")).MessageEmbed().setTimestamp().setDescription("I think it is currently this time for you"));
-            return message.channel.sendEmbed(new (require("discord.js")).MessageEmbed().setTimestamp(time).setDescription(`Today, ${args+meridian} ${timezone} converts to:`));
+            return message.channel.send(new (require("discord.js")).MessageEmbed().setTimestamp(time).setDescription(`Today, ${args+meridian} ${timezone} converts to:`));
             }
             catch(e){
                 console.log(e);
-                message.reply("Thats now how you use \time, try something like: \time 10pm cest");
+                message.reply("Thats now how you use \\time, try something like: \\time 10pm cest");
             }
         } else {
             // assuming 2019, its not a leap year 
@@ -72,8 +72,8 @@ module.exports = {
                         date.setUTCDate(day);
                         date.setUTCHours(parseInt(hour));
                         date.setUTCMinutes(parseInt(minutes));
-                        message.channel.sendEmbed(new (require("discord.js")).MessageEmbed().setTimestamp().setDescription("I think it is currently this time for you"));
-                        message.channel.sendEmbed(new (require("discord.js")).MessageEmbed().setTimestamp(date).setDescription(`So ${month}/${day} ${inTime} UTC must be`));
+                        message.channel.send(new (require("discord.js")).MessageEmbed().setTimestamp().setDescription("I think it is currently this time for you"));
+                        message.channel.send(new (require("discord.js")).MessageEmbed().setTimestamp(date).setDescription(`So ${month}/${day} ${inTime} UTC must be`));
                     }).catch(e => {
                         console.error(e);
                         message.channel.send("Incorrect something.");
