@@ -14,7 +14,9 @@ module.exports = function (client) {
     
     app.get('/activity', function (req, res) {
         client.DBconnection.query(
-            'select timestamp,count(*) as online from VoiceConnected group by timestamp',
+            'select timestamp,count(*) as online from VoiceConnected '+
+            ' WHERE VoiceConnected.TimeStamp >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY '+
+            ' group by timestamp',
             function (error, results, fields) {
                 if(error != null){ 
                     console.log(error)
@@ -60,7 +62,7 @@ module.exports = function (client) {
         client.DBconnection.query(
            "SSELECT TimeStamp, Channel.ChannelName FROM `VoiceConnected` " +
            "JOIN Channel on Channel.ID = VoiceConnected.ChannelID " +
-           "WHERE VoiceConnected.ID = ?" , [userId],
+           "WHERE VoiceConnected.TimeStamp >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY AND VoiceConnected.ID = ?" , [userId],
             function (error, results, fields) {
                 if(error != null){ 
                     console.log(error)
