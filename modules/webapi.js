@@ -13,7 +13,6 @@ module.exports = function (client) {
     })
     
     app.get('/activity', function (req, res) {
-        var responce;
         client.DBconnection.query(
             'select timestamp,count(*) as online from VoiceConnected group by timestamp',
             function (error, results, fields) {
@@ -28,7 +27,6 @@ module.exports = function (client) {
     })
 
     app.get('/channelActivity', function (req, res) {
-        var responce;
         client.DBconnection.query(
            "select Channel.ChannelName as name, count(*) as y from VoiceConnected left join Channel on VoiceConnected.ChannelID = Channel.ID "+
            " WHERE VoiceConnected.TimeStamp >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY group by Channel.ChannelName",
@@ -43,10 +41,41 @@ module.exports = function (client) {
         });
     })
     app.get('/userActivity', function (req, res) {
-        var responce;
         client.DBconnection.query(
            "SELECT Members.DisplayName as name, count(*) as y FROM VoiceConnected LEFT JOIN Members ON VoiceConnected.ID = Members.ID "+
            " WHERE VoiceConnected.TimeStamp >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY GROUP BY VoiceConnected.ID order by y desc" ,
+            function (error, results, fields) {
+                if(error != null){ 
+                    console.log(error)
+                    res.send(JSON.stringify("Failure"))
+                }
+                else{
+                    res.send(JSON.stringify(results))
+            }
+        });
+    })
+
+    app.get('/userOnlineTimes/:userId', function (req, res) {
+        var userId = req.params["userId"];
+        client.DBconnection.query(
+           "SSELECT TimeStamp, Channel.ChannelName FROM `VoiceConnected` " +
+           "JOIN Channel on Channel.ID = VoiceConnected.ChannelID " +
+           "WHERE VoiceConnected.ID = ?" , [userId],
+            function (error, results, fields) {
+                if(error != null){ 
+                    console.log(error)
+                    res.send(JSON.stringify("Failure"))
+                }
+                else{
+                    res.send(JSON.stringify(results))
+            }
+        });
+    })
+
+    app.get('/userInfo/:userId', function (req, res) {
+        var userId = req.params["userId"];
+        client.DBconnection.query(
+           "SELECT * FROM `Members` where ID =  ?" , [userId],
             function (error, results, fields) {
                 if(error != null){ 
                     console.log(error)
