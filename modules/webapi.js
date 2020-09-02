@@ -60,7 +60,7 @@ module.exports = function (client) {
     app.get('/userOnlineTimes/:userId', function (req, res) {
         var userId = req.params["userId"];
         client.DBconnection.query(
-           "SELECT TimeStamp, 1 as online FROM `VoiceConnected` " +
+           "SELECT timestamp, 1 as online FROM `VoiceConnected` " +
            "JOIN Channel on Channel.ID = VoiceConnected.ChannelID " +
            "WHERE VoiceConnected.TimeStamp >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY AND VoiceConnected.ID = ?" , [userId],
             function (error, results, fields) {
