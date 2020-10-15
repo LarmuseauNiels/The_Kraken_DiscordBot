@@ -10,6 +10,8 @@ module.exports = {
              function (error, results, fields) {
                 if(error != null){ console.log(error)}
                 if(results != null){
+                    console.log(results);
+                    console.log(results[0].RecieverID);
                     client.users.fetch(results.RecieverID).then(reciever => {
                         reciever.send("Secret santa: '"+ text+ "'");
                         message.reply("Send '" + text + "' to " + reciever.username);
