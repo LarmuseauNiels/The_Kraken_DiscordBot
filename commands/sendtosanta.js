@@ -10,7 +10,7 @@ module.exports = {
              function (error, results, fields) {
                 if(error != null){ console.log(error)}
                 if(results != null){
-                    client.users.fetch(results).then(reciever => {
+                    client.users.fetch(results.SenderID).then(reciever => {
                         reciever.send("Gift reciever: '"+ text+ "'");
                         message.reply("Send '" + text + "' to secret santa");
                     })
