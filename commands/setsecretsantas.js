@@ -1,3 +1,4 @@
+const admins = require("../data/admins.json");
 module.exports = {
     name: "setsecretsantas",
     desc: "match people set secret santas",
