@@ -37,15 +37,22 @@ function setsecretsanta(client, message, args){
                                 // find match for reciever
                                 console.log("matching " + reciever.ID)
                                 let sender = senders.find(sender => (sender.HasINTER == 1 && reciever.RequiresINTER == 1 )  || (sender.HasEU == 1 && reciever.RequiresEU ==1));
-                                
-                                console.log("matched " + sender.ID)
-                                     matches.push({rec:reciever.ID,send:sender.ID});
-                                     //recievers.splice(recievers.indexOf(reciever),1);
-                                     senders.splice(senders.indexOf(sender),1);
-                                
+                                if(sender != null){
+                                    console.log("matched " + sender.ID)
+                                    matches.push({rec:reciever.ID,send:sender.ID});
+                                    senders.splice(senders.indexOf(sender),1);
+                                }
                             });
-                            console.log(matches);
                             console.log("matched people: " + matches.length);
+                            if(matches.length == 11){
+                                matches.forEach(match =>{
+                                    client.DBconnection.query(
+                                        'INSERT INTO SSLink (RecieverID, SenderID) VALUES (?, ?)',
+                                        [match.rec, match.send], function (error, results, fields) {
+                                            if(error != null){ console.log(error)}
+                                        });
+                                })
+                            }
                         }
                         else{message.reply("Failed"); }
                     });
