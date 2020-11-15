@@ -15,8 +15,6 @@ module.exports = {
         else{
             message.reply("ERR: No premissions");
         }
-
-        
     }
 };
 
@@ -28,6 +26,7 @@ function setsecretsanta(client, message, args){
             if(recievers != null){
                 client.DBconnection.query("Select ID,HasEU,HasINTER,HasPaypal from SSSender ",
                      function (error, senders, fields) {
+                        let matches = [];
                         if(error != null){ console.log(error)}
                         if(senders != null){
                             recievers = shuffle(recievers);
@@ -37,7 +36,17 @@ function setsecretsanta(client, message, args){
                             recievers.forEach(reciever => {
                                 //senders.find
                                 // find match for reciever
+                                let sender = senders.find(sender => (sender.HasINTER == 1 && reciever.RequiresINTER ==1 )  || (sender.HasEU == 1 && reciever.RequiresEU ==1));
+                                if(sender == null) {
+                                    console.log(console.log("WARNING: can't match" + reciever.id + " with a compatible sender!!"));
+                                    break;
+                                };
+                                matches.push({rec:reciever.id,send:sender.id});
+                                recievers.splice(recievers.indexOf(reciever),1);
+                                senders.splice(senders.indexOf(sender),1);
                             });
+                            console.log(matches);
+                            console.log("matched people: " + matches.length);
                         }
                         else{message.reply("Failed"); }
                     });
@@ -50,10 +59,6 @@ function setsecretsanta(client, message, args){
 function isInArray(value, array) {
     return array.indexOf(value) > -1;
 }
-
-
-
-
 
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
