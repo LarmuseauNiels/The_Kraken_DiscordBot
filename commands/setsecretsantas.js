@@ -46,6 +46,11 @@ function setsecretsanta(client, message, args){
 }
 
 
+function isInArray(value, array) {
+    return array.indexOf(value) > -1;
+}
+
+
 
 
 
