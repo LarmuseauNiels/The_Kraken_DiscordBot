@@ -13,7 +13,10 @@ module.exports = {
                     client.users.fetch(results[0].RecieverID).then(reciever => {
                         reciever.send("Secret santa: '"+ text+ "'");
                         message.reply("Send '" + text + "' to " + reciever.username);
-                    }).catch(error => console.log(error));
+                    }).catch(error => {
+                        console.log(error)
+                        message.reply("Send this to niels: " + error);
+                    });
                 }
                 else{
                     message.reply("Failed to send message");
