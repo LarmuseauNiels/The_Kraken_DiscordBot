@@ -31,8 +31,10 @@ function setsecretsanta(client, message, args){
                         if(senders != null){
                             recievers = shuffle(recievers);
                             senders = shuffle(senders);
-
+                             console.log(recievers);
+                             console.log(senders);
                             recievers.forEach(reciever => {
+                                //senders.find
                                 // find match for reciever
                             });
                         }
