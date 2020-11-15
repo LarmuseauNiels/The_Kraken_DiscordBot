@@ -2,7 +2,7 @@ module.exports = {
     name: "sendtoreciever",
     desc: "send message to your gift reciever for Secret santa",
     example: "\\sendtoreciever your package will arive tommorow",
-    alias: ["str","SendToReciever","sendtr","sendtor"],
+    alias: ["str","SendToReciever","sendtr","sendtor","sendtoreceiver"],
     run: (client, message, args) => {
         let text = message.content.slice(message.content.indexOf(" ") + 1);
         client.DBconnection.query(
