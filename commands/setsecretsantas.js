@@ -39,8 +39,8 @@ function setsecretsanta(client, message, args){
                                 let sender = senders.find(sender => (sender.HasINTER == 1 && reciever.RequiresINTER == 1 )  || (sender.HasEU == 1 && reciever.RequiresEU ==1));
                                 
                                 console.log("matched " + sender.ID)
-                                    // matches.push({rec:reciever.ID,send:sender.ID});
-                                    // recievers.splice(recievers.indexOf(reciever),1);
+                                     matches.push({rec:reciever.ID,send:sender.ID});
+                                     recievers.splice(recievers.indexOf(reciever),1);
                                     // senders.splice(senders.indexOf(sender),1);
                                 
                             });
