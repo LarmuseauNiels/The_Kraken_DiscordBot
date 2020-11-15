@@ -37,10 +37,10 @@ function setsecretsanta(client, message, args){
                                 // find match for reciever
                                 let sender = senders.find(sender => (sender.HasINTER == 1 && reciever.RequiresINTER ==1 )  || (sender.HasEU == 1 && reciever.RequiresEU ==1));
                                 if(sender == null) {
-                                    console.log(console.log("WARNING: can't match" + reciever.id + " with a compatible sender!!"));
+                                    console.log(console.log("WARNING: can't match" + reciever.ID + " with a compatible sender!!"));
                                 }
                                 else{
-                                    matches.push({rec:reciever.id,send:sender.id});
+                                    matches.push({rec:reciever.ID,send:sender.ID});
                                     recievers.splice(recievers.indexOf(reciever),1);
                                     senders.splice(senders.indexOf(sender),1);
                                 }
