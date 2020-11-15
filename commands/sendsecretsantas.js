@@ -1,3 +1,4 @@
+const admins = require("../data/admins.json");
 module.exports = {
     name: "sendsecretsantas",
     desc: "Tell people who their gift reciever is",
@@ -18,6 +19,10 @@ module.exports = {
         
     }
 };
+
+function isInArray(value, array) {
+    return array.indexOf(value) > -1;
+}
 
 function sendsecretsanta(client, message, args){
     client.DBconnection.query(
