@@ -40,8 +40,8 @@ function setsecretsanta(client, message, args){
                                 
                                 console.log("matched " + sender.ID)
                                      matches.push({rec:reciever.ID,send:sender.ID});
-                                     recievers.splice(recievers.indexOf(reciever),1);
-                                    // senders.splice(senders.indexOf(sender),1);
+                                     //recievers.splice(recievers.indexOf(reciever),1);
+                                     senders.splice(senders.indexOf(sender),1);
                                 
                             });
                             console.log(matches);
