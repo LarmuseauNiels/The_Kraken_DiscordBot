@@ -20,7 +20,7 @@ module.exports = {
 
 function setsecretsanta(client, message, args){
     client.DBconnection.query(
-        "Select ID,RequiresEU,RequiresINTER,RequiresPaypal from SSReciever ",
+        "Select ID,RequiresEU,RequiresINTER,RequiresPaypal from SSReciever ORDER BY RequiresEU ASC ",
          function (error, recievers, fields) {
             if(error != null){ console.log(error)}
             if(recievers != null){
@@ -29,7 +29,6 @@ function setsecretsanta(client, message, args){
                         let matches = [];
                         if(error != null){ console.log(error)}
                         if(senders != null){
-                            recievers = shuffle(recievers);
                             senders = shuffle(senders);
                              console.log(recievers);
                              console.log(senders);
@@ -39,11 +38,12 @@ function setsecretsanta(client, message, args){
                                 let sender = senders.find(sender => (sender.HasINTER == 1 && reciever.RequiresINTER ==1 )  || (sender.HasEU == 1 && reciever.RequiresEU ==1));
                                 if(sender == null) {
                                     console.log(console.log("WARNING: can't match" + reciever.id + " with a compatible sender!!"));
-                                    break;
-                                };
-                                matches.push({rec:reciever.id,send:sender.id});
-                                recievers.splice(recievers.indexOf(reciever),1);
-                                senders.splice(senders.indexOf(sender),1);
+                                }
+                                else{
+                                    matches.push({rec:reciever.id,send:sender.id});
+                                    recievers.splice(recievers.indexOf(reciever),1);
+                                    senders.splice(senders.indexOf(sender),1);
+                                }
                             });
                             console.log(matches);
                             console.log("matched people: " + matches.length);
