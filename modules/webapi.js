@@ -57,6 +57,21 @@ module.exports = function (client) {
         });
     })
 
+    app.get('/userActivityAll', function (req, res) {
+        client.DBconnection.query(
+           "SELECT Members.DisplayName as name, count(*) as y FROM VoiceConnected LEFT JOIN Members ON VoiceConnected.ID = Members.ID "+
+           " GROUP BY VoiceConnected.ID order by y desc" ,
+            function (error, results, fields) {
+                if(error != null){ 
+                    console.log(error)
+                    res.send(JSON.stringify("Failure"))
+                }
+                else{
+                    res.send(JSON.stringify(results))
+            }
+        });
+    })
+
     app.get('/userOnlineTimes/:userId', function (req, res) {
         var userId = req.params["userId"];
         client.DBconnection.query(
