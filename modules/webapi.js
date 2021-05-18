@@ -103,6 +103,39 @@ module.exports = function (client) {
             }
         });
     })
+
+    app.get('/PossibleYears', function (req, res) {
+        var year = req.params["year"];
+        client.DBconnection.query(
+            "select DISTINCT YEAR(timestamp) from VoiceConnected",
+            function (error, results, fields) {
+                if(error != null){ 
+                    console.log(error)
+                    res.send(JSON.stringify("Failure"))
+                }
+                else{
+                    res.send(JSON.stringify(results))
+            }
+        });
+    })
+
+    app.get('/YearActivity/:year', function (req, res) {
+        var year = req.params["year"];
+        client.DBconnection.query(
+            "select  MONTH(timestamp) as month, DAY(timestamp) as day ,YEAR(timestamp) as year, count(*) as online from VoiceConnected  "+
+            "Where YEAR(timestamp) = ? "+
+            "group by year,month, day",[year],
+            function (error, results, fields) {
+                if(error != null){ 
+                    console.log(error)
+                    res.send(JSON.stringify("Failure"))
+                }
+                else{
+                    res.send(JSON.stringify(results))
+            }
+        });
+    })
+
     
     app.listen(3000)
 }
