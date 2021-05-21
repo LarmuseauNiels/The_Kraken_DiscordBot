@@ -28,6 +28,23 @@ module.exports = function (client) {
         });
     })
 
+    app.get('/activityFromDate/:date', function (req, res) {
+        var date = req.params["date"];
+        client.DBconnection.query(
+            'select timestamp,count(*) as online from VoiceConnected '+
+            ' WHERE date(TimeStamp) = ? '+
+            ' group by timestamp ',[date],
+            function (error, results, fields) {
+                if(error != null){ 
+                    console.log(error)
+                    res.send(JSON.stringify("Failure"))
+                }
+                else{
+                    res.send(JSON.stringify(results))
+            }
+        });
+    })
+
     app.get('/channelActivity', function (req, res) {
         client.DBconnection.query(
            "select Channel.ChannelName as name, count(*) as y from VoiceConnected left join Channel on VoiceConnected.ChannelID = Channel.ID "+
