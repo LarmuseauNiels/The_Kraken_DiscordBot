@@ -45,6 +45,22 @@ module.exports = function (client) {
         });
     })
 
+    app.get('/userActivityDate/:date', function (req, res) {
+        var date = req.params["date"];
+        client.DBconnection.query(
+           "SELECT Members.DisplayName as name, count(*) as y FROM VoiceConnected LEFT JOIN Members ON VoiceConnected.ID = Members.ID "+
+           " WHERE date(TimeStamp) = ? GROUP BY VoiceConnected.ID order by y desc" , [date],
+            function (error, results, fields) {
+                if(error != null){ 
+                    console.log(error)
+                    res.send(JSON.stringify("Failure"))
+                }
+                else{
+                    res.send(JSON.stringify(results))
+            }
+        });
+    })
+
     app.get('/channelActivity', function (req, res) {
         client.DBconnection.query(
            "select Channel.ChannelName as name, count(*) as y from VoiceConnected left join Channel on VoiceConnected.ChannelID = Channel.ID "+
@@ -73,6 +89,8 @@ module.exports = function (client) {
             }
         });
     })
+
+   
 
     app.get('/userActivityAll', function (req, res) {
         client.DBconnection.query(
