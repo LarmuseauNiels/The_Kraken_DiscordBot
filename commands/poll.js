@@ -14,12 +14,19 @@ module.exports = {
         if(argumentGroups.length == 1){
             pollEmbed(message,argumentGroups[0].trim(), ["Yes","No"],60,['👍','👎'] );
         }
-        if(argumentGroups.length == 2){
-            pollEmbed(message,argumentGroups[0].trim(), argumentGroups[1].split(",") );
+        else{
+            var options = argumentGroups[1].split(",");
+             options.forEach(element => {
+                element = element.trim();
+             });
+            if(argumentGroups.length == 2){
+                pollEmbed(message,argumentGroups[0].trim(), options );
+            }
+            if(argumentGroups.length == 3 && !isNaN(argumentGroups[2].trim())){
+                pollEmbed(message,argumentGroups[0].trim(), options, parseFloat(argumentGroups[2].trim()) );
+            }
         }
-        if(argumentGroups.length == 3 && !isNaN(argumentGroups[2].trim())){
-            pollEmbed(message,argumentGroups[0].trim(), argumentGroups[1].split(","), parseFloat(argumentGroups[2].trim()) );
-        }
+       
         
       }
     }
