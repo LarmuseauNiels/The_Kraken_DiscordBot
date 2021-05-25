@@ -15,10 +15,10 @@ module.exports = {
             pollEmbed(message,argumentGroups[0].trim(), ["Yes","No"],60,['👍','👎'] );
         }
         if(argumentGroups.length == 2){
-            pollEmbed(message,argumentGroups[0].trim(), argumentGroups[1].split(",").forEach(element => {element.trim();}) );
+            pollEmbed(message,argumentGroups[0].trim(), argumentGroups[1].split(",") );
         }
         if(argumentGroups.length == 3 && !isNaN(argumentGroups[2].trim())){
-            pollEmbed(message,argumentGroups[0].trim(), argumentGroups[1].split(",").forEach(element => {element.trim();}), parseFloat(argumentGroups[2].trim()) );
+            pollEmbed(message,argumentGroups[0].trim(), argumentGroups[1].split(","), parseFloat(argumentGroups[2].trim()) );
         }
         
       }
