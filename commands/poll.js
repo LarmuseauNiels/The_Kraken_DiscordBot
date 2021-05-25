@@ -11,13 +11,13 @@ module.exports = {
       }
       else{
         var argumentGroups = message.content.slice(message.content.indexOf(' ')).split(";");
-        if(argumentGroups.length = 1){
+        if(argumentGroups.length == 1){
             pollEmbed(message,argumentGroups[0].trim(), ["Yes","No"],60,['👍','👎'] );
         }
-        if(argumentGroups.length = 2){
+        if(argumentGroups.length == 2){
             pollEmbed(message,argumentGroups[0].trim(), argumentGroups[1].split(",").forEach(element => {element.trim();}) );
         }
-        if(argumentGroups.length = 3 && !isNaN(argumentGroups[2].trim())){
+        if(argumentGroups.length == 3 && !isNaN(argumentGroups[2].trim())){
             pollEmbed(message,argumentGroups[0].trim(), argumentGroups[1].split(",").forEach(element => {element.trim();}), parseFloat(argumentGroups[2].trim()) );
         }
         
