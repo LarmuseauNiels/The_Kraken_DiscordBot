@@ -22,6 +22,9 @@ module.exports = {
             if(argumentGroups.length == 3 && !isNaN(argumentGroups[2].trim())){
                 pollEmbed(message,argumentGroups[0].trim(), options, parseFloat(argumentGroups[2].trim()) );
             }
+            if(argumentGroups.length == 4 && !isNaN(argumentGroups[2].trim())){
+                pollEmbed(message,argumentGroups[0].trim(), options, parseFloat(argumentGroups[2].trim()) , argumentGroups[4].split(","));
+            }
         }
        
         
