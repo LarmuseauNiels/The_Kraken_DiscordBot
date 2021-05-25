@@ -16,9 +16,6 @@ module.exports = {
         }
         else{
             var options = argumentGroups[1].split(",");
-             options.forEach(element => {
-                element = element.trim();
-             });
             if(argumentGroups.length == 2){
                 pollEmbed(message,argumentGroups[0].trim(), options );
             }
@@ -59,8 +56,8 @@ const pollEmbed = async (msg, title, options, timeout = 120, emojiList = defEmoj
 	const emojiInfo = {};
 	for (const option of options) {
 		const emoji = emojiList.splice(0, 1);
-		emojiInfo[emoji] = { option: option, votes: 0 };
-		text += `${emoji} : \`${option}\`\n\n`;
+		emojiInfo[emoji] = { option: option.trim(), votes: 0 };
+		text += `${emoji} : \`${option.trim()}\`\n\n`;
 	}
 	const usedEmojis = Object.keys(emojiInfo);
 	usedEmojis.push(forceEndPollEmoji);
