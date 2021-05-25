@@ -12,7 +12,13 @@ module.exports = {
       else{
         var argumentGroups = message.content.slice(message.content.indexOf(' ')).split(";");
         if(argumentGroups.length = 1){
-            pollEmbed(message,argumentGroups[0].trim(), ["Yes","No"],5,['👍','👎'] );
+            pollEmbed(message,argumentGroups[0].trim(), ["Yes","No"],60,['👍','👎'] );
+        }
+        if(argumentGroups.length = 2){
+            pollEmbed(message,argumentGroups[0].trim(), argumentGroups[1].split(",").forEach(element => {element.trim();}) );
+        }
+        if(argumentGroups.length = 3 && !isNaN(argumentGroups[2].trim())){
+            pollEmbed(message,argumentGroups[0].trim(), argumentGroups[1].split(",").forEach(element => {element.trim();}), parseFloat(argumentGroups[2].trim()) );
         }
         
       }
@@ -35,14 +41,14 @@ const defEmojiList = [
 	'\uD83D\uDD1F'
 ];
 
-const pollEmbed = async (msg, title, options, timeout = 5, emojiList = defEmojiList.slice(), forceEndPollEmoji = '\u2705') => {
+const pollEmbed = async (msg, title, options, timeout = 120, emojiList = defEmojiList.slice(), forceEndPollEmoji = '\u2705') => {
 	if (!msg && !msg.channel) return msg.reply('Channel is inaccessible.');
 	if (!title) return msg.reply('Poll title is not given.');
 	if (!options) return msg.reply('Poll options are not given.');
 	if (options.length < 2) return msg.reply('Please provide more than one choice.');
 	if (options.length > emojiList.length) return msg.reply(`Please provide ${emojiList.length} or less choices.`);
 
-	let text = `*To vote, react using the correspoding emoji.\nThe voting will end in **${timeout} seconds**.\nPoll creater can end the poll **forcefully** by reacting to ${forceEndPollEmoji} emoji.*\n\n`;
+	let text = `*To vote, react using the correspoding emoji.\nThe voting will end in **${timeout} minutes**.\nPoll creater can end with ${forceEndPollEmoji}.*\n\n`;
 	const emojiInfo = {};
 	for (const option of options) {
 		const emoji = emojiList.splice(0, 1);
@@ -57,7 +63,7 @@ const pollEmbed = async (msg, title, options, timeout = 5, emojiList = defEmojiL
 
 	const reactionCollector = poll.createReactionCollector(
 		(reaction, user) => usedEmojis.includes(reaction.emoji.name) && !user.bot,
-		timeout === 0 ? {} : { time: timeout * 1000 }
+		timeout === 0 ? {} : { time: timeout * 1000 * 60 }
 	);
 	const voterInfo = new Map();
 	reactionCollector.on('collect', (reaction, user) => {
