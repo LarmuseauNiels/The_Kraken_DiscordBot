@@ -73,7 +73,7 @@ const pollEmbed = async (msg, title, options, timeout = 120, emojiList = defEmoj
 	reactionCollector.on('collect', (reaction, user) => {
 		if (usedEmojis.includes(reaction.emoji.name)) {
 			if (reaction.emoji.name === forceEndPollEmoji && msg.author.id === user.id) return reactionCollector.stop();
-			//if (!voterInfo.has(user.id)) voterInfo.set(user.id, { emoji: reaction.emoji.name });
+			if (!voterInfo.has(user.id)) voterInfo.set(user.id, { emoji: reaction.emoji.name });
 			// const votedEmoji = voterInfo.get(user.id).emoji;
 			// if (votedEmoji !== reaction.emoji.name) {
 			// 	const lastVote = poll.reactions.get(votedEmoji);
@@ -82,7 +82,7 @@ const pollEmbed = async (msg, title, options, timeout = 120, emojiList = defEmoj
 			// 	emojiInfo[votedEmoji].votes -= 1;
 			// 	voterInfo.set(user.id, { emoji: reaction.emoji.name });
 			// }
-			//emojiInfo[reaction.emoji.name].votes += 1;
+			emojiInfo[reaction.emoji.name].votes += 1;
 		}
 	});
 
