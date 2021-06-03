@@ -97,9 +97,9 @@ const pollEmbed = async (msg, title, options, timeout = 120, emojiList = defEmoj
 		//console.log(collected);
 		text = '*Ding! Ding! Ding! Time\'s up!\n Results are in,*\n\n';
 		for (const emoji in emojiInfo){
-			console.log(emoji);
+			console.log(emoji + "  " + collected[emoji].count);
 			//console.log(collected.array().find(x => x._emoji.name == emoji));
-			emojiInfo[emoji].votes = collected.array().find(x => x._emoji.name == emoji);
+			emojiInfo[emoji].votes = collected[emoji].count;
 			text += `\`${emojiInfo[emoji].option}\` - \`${emojiInfo[emoji].votes}\`\n\n`;
 		}
 		 
