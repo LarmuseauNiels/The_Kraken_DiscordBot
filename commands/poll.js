@@ -32,9 +32,6 @@ module.exports = {
     }
 };
 
-
-
-
 const defEmojiList = [
 	'\u0031\u20E3',
 	'\u0032\u20E3',
@@ -77,14 +74,14 @@ const pollEmbed = async (msg, title, options, timeout = 120, emojiList = defEmoj
 		if (usedEmojis.includes(reaction.emoji.name)) {
 			if (reaction.emoji.name === forceEndPollEmoji && msg.author.id === user.id) return reactionCollector.stop();
 			if (!voterInfo.has(user.id)) voterInfo.set(user.id, { emoji: reaction.emoji.name });
-			const votedEmoji = voterInfo.get(user.id).emoji;
-			if (votedEmoji !== reaction.emoji.name) {
-				const lastVote = poll.reactions.get(votedEmoji);
-				lastVote.count -= 1;
-				lastVote.users.remove(user.id);
-				emojiInfo[votedEmoji].votes -= 1;
-				voterInfo.set(user.id, { emoji: reaction.emoji.name });
-			}
+			// const votedEmoji = voterInfo.get(user.id).emoji;
+			// if (votedEmoji !== reaction.emoji.name) {
+			// 	const lastVote = poll.reactions.get(votedEmoji);
+			// 	lastVote.count -= 1;
+			// 	lastVote.users.remove(user.id);
+			// 	emojiInfo[votedEmoji].votes -= 1;
+			// 	voterInfo.set(user.id, { emoji: reaction.emoji.name });
+			// }
 			emojiInfo[reaction.emoji.name].votes += 1;
 		}
 	});
