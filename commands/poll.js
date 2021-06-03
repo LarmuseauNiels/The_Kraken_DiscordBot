@@ -82,7 +82,7 @@ const pollEmbed = async (msg, title, options, timeout = 120, emojiList = defEmoj
 			// 	emojiInfo[votedEmoji].votes -= 1;
 			// 	voterInfo.set(user.id, { emoji: reaction.emoji.name });
 			// }
-			emojiInfo[reaction.emoji.name].votes += 1;
+			//emojiInfo[reaction.emoji.name].votes += 1;
 		}
 	});
 
@@ -95,15 +95,18 @@ const pollEmbed = async (msg, title, options, timeout = 120, emojiList = defEmoj
 
 	reactionCollector.on('end', (collected) => {
 		//console.log(collected);
-		console.log(collected);
 		text = '*Ding! Ding! Ding! Time\'s up!\n Results are in,*\n\n';
 		for (const emoji in emojiInfo){
-			console.log(emoji);
 
-			console.log(collected.get(emoji));
+			myVar = collected.get(emoji);
+			if(typeof myVar === 'undefined'){
+				text += `\`${emojiInfo[emoji].option}\` - \`${0}\`\n\n`;
+			}
+			else{
+				text += `\`${emojiInfo[emoji].option}\` - \`${myVar.count -1}\`\n\n`;
+			}
 			//console.log(collected.array().find(x => x._emoji.name == emoji));
 			//emojiInfo[emoji].votes = collected[emoji].count;
-			text += `\`${emojiInfo[emoji].option}\` - \`${emojiInfo[emoji].votes}\`\n\n`;
 		}
 		 
 		poll.delete();
