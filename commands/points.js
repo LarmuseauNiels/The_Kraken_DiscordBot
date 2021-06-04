@@ -28,10 +28,10 @@ module.exports = {
                                 PreviousPoints = 0;
                             }
                             else{
-                                PreviousPoints = results[0];
+                                PreviousPoints = results[0].TotalPoints;
                             }
                             newpoints = PreviousPoints + args[1]
-
+                            
                             message.reply(newpoints);
                         }
                      }
