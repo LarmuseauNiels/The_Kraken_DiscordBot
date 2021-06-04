@@ -38,7 +38,7 @@ module.exports = {
                             'UPDATE Points SET TotalPoints = ? ,lastComment = ? WHERE userid = ?',
                             [newpoints , text, target.id], function (error, results, fields) {
                                 if(error != null){ console.log(error)}
-                                else{message.reply("Changed " + target.name + " from " + PreviousPoints+ " to "+ newpoints);}
+                                else{message.reply("Changed " + target.username + " from " + PreviousPoints+ " to "+ newpoints);}
                             });
 
                             
