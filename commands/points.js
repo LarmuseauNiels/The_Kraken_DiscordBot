@@ -15,12 +15,24 @@ module.exports = {
                      function (error, results, fields) {
                         if(error != null){ 
                             console.log(error)
-                
                         }
                         else{
                             console.log(results);
-                            if(results.length == 0)
-                          //message.reply(results);
+                            var PreviousPoints;
+                            if(results.length == 0){
+                                client.DBconnection.query(
+                                'INSERT INTO Points (userid) VALUES (?)',
+                                [target.id], function (error, results, fields) {
+                                    if(error != null){ console.log(error)}
+                                });
+                                PreviousPoints = 0;
+                            }
+                            else{
+                                PreviousPoints = results[0];
+                            }
+                            newpoints = PreviousPoints + args[1]
+
+                            message.reply(newpoints);
                         }
                      }
                  );
