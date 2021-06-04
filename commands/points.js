@@ -30,9 +30,18 @@ module.exports = {
                             else{
                                 PreviousPoints = results[0].TotalPoints;
                             }
-                            newpoints = parseInt(PreviousPoints) + parseInt(args[1])
+                            newpoints = parseInt(PreviousPoints) + parseInt(args[1]);
+                            var text = "";
+                            if(args.length == 3) text = args[2];
+                            
+                            client.DBconnection.query(
+                            'UPDATE Points SET TotalPoints = ? ,lastComment = ? WHERE userid = ?',
+                            [newpoints , text, target.id], function (error, results, fields) {
+                                if(error != null){ console.log(error)}
+                                else{message.reply("Changed " + target.name + " from " + PreviousPoints+ " to "+ newpoints);}
+                            });
 
-                            message.reply(newpoints);
+                            
                         }
                      }
                  );
