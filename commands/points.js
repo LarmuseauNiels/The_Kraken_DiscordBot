@@ -18,7 +18,8 @@ module.exports = {
                 
                         }
                         else{
-                          message.reply(results);
+                            console.log(results);
+                          //message.reply(results);
                         }
                      }
                  );
@@ -33,7 +34,7 @@ module.exports = {
 
 
               } catch (err) {
-                message.channel.send(`\`ERROR\` \`\`\`xl\n${(err)}\n\`\`\``);
+                message.reply(`\`ERROR\` \`\`\`xl\n${(err)}\n\`\`\``);
               }
         }
         else{
