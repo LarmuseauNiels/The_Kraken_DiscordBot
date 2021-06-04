@@ -19,6 +19,7 @@ module.exports = {
                         }
                         else{
                             console.log(results);
+                            if(results.length == 0)
                           //message.reply(results);
                         }
                      }
