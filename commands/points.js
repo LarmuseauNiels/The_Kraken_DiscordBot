@@ -30,8 +30,8 @@ module.exports = {
                             else{
                                 PreviousPoints = results[0].TotalPoints;
                             }
-                            newpoints = PreviousPoints + args[1]
-                            
+                            newpoints = parseInt(PreviousPoints) + parseInt(args[1])
+
                             message.reply(newpoints);
                         }
                      }
