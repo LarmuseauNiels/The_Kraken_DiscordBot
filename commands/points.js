@@ -32,7 +32,7 @@ module.exports = {
                             }
                             newpoints = parseInt(PreviousPoints) + parseInt(args[1]);
                             var text = "";
-                            if(args.length == 3) text = args[2];
+                            if(args.length > 2) text = args.slice(2).join(' '); 
                             
                             client.DBconnection.query(
                             'UPDATE Points SET TotalPoints = ? ,lastComment = ? WHERE userid = ?',
