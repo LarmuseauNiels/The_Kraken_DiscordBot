@@ -17,7 +17,6 @@ module.exports = {
                             console.log(error)
                         }
                         else{
-                            console.log(results[0].TotalPoints);
                             var PreviousPoints;
                             if(results.length == 0){
                                 client.DBconnection.query(
