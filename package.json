@@ -19,6 +19,7 @@
     "opusscript": "0.0.6",
     "request": "^2.88.2",
     "uws": "^99.0.0",
+    "weky": "^3.1.8",
     "ytdl-core": "^2.1.7",
     "ytpl": "^0.1.22",
     "ytsearcher": "^1.2.2",
@@ -26,7 +27,6 @@
   },
   "author": "niels2398",
   "license": "ISC",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LarmuseauNiels/Royal-Merchant-Guild-DiscordBot.git"
