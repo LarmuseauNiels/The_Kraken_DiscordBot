@@ -10,7 +10,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "discord.js": "^12.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "ical": "^0.6.0",
     "ms": "^2.1.2",
     "mysql": "^2.18.1",
